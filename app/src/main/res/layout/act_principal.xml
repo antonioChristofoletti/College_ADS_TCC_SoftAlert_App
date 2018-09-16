@@ -20,6 +20,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayoutActPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorwhite">
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabLayoutActPrincipalItemNoticias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NOTÍCIAS" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabLayoutActPrincipalItemDicas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DICAS" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabLayoutActPrincipalItemPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PERFIL" />
+    </android.support.design.widget.TabLayout>
+
     <include layout="@layout/content_act_principal" />
 
 </android.support.design.widget.CoordinatorLayout>
