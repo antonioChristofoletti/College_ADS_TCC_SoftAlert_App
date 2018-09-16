@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Soft Alert</string>
+    <string name="title_activity_act_autenticacao">Autenticação</string>
+    <string name="lbl_Salvar">Salvar</string>
+    <string name="lbl_Cancelar">Cancelar</string>
+    <string name="lbl_cadastro_usuario">Cadastro Usuário</string>
+
+    <string name="apenasLetras">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="apenasLetrasNumerosInteiros">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
+    <string name="apenasFormatoCPF">0123456789/.-</string>
+    <string name="apenasFormatoRG">0123456789-.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="apenasFormatoTelefone">)(0123456789-</string>
+    <string name="lbl_ok">OK</string>
+    <string name="SoftAlert">Soft Alert</string>
+    <string name="title_activity_act_principal">ActPrincipal</string>
+</resources>

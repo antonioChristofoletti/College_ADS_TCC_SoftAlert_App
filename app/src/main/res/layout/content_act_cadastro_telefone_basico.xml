@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".softalert.View.ActCadastro_telefone_basico"
+    tools:layout_editor_absoluteY="81dp"
+    tools:showIn="@layout/act_cadastro_telefone_basico">
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/txtbTelefone_content_act_cadastro_telefone_basico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:endIcon="@drawable/baseline_help_outline_white_24"
+        app:iconSignifier="@drawable/baseline_contact_phone_white_24"
+        app:labelText="Número do Dispositivo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/txtTelefone_content_act_cadastro_telefone_basico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="@string/apenasFormatoTelefone"
+            android:imeOptions="actionNext"
+            android:inputType="number|text"
+            android:maxLength="15" />/>
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/txtbCodigoVerificador_content_act_cadastro_telefone_basico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:endIcon="@drawable/baseline_help_outline_white_24"
+        app:iconSignifier="@drawable/baseline_verified_user_white_24"
+        app:labelText="Código Verificador"
+        app:layout_constraintEnd_toEndOf="@+id/txtbTelefone_content_act_cadastro_telefone_basico"
+        app:layout_constraintStart_toStartOf="@+id/txtbTelefone_content_act_cadastro_telefone_basico"
+        app:layout_constraintTop_toBottomOf="@+id/txtbTelefone_content_act_cadastro_telefone_basico">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/txtCodigoVerificador_content_act_cadastro_telefone_basico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="4" />/>
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <Button
+        android:id="@+id/btnEnviarCodigo_content_act_cadastro_telefone_basico"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/backgroundbuttongerenciador"
+        android:onClick="onClickbtnEnviarCodigo_content_act_cadastro_telefone_basico"
+        android:text="ENVIAR CÓDIGO"
+        android:textColor="@color/colorwhite"
+        app:layout_constraintEnd_toEndOf="@+id/txtbCodigoVerificador_content_act_cadastro_telefone_basico"
+        app:layout_constraintStart_toStartOf="@+id/txtbCodigoVerificador_content_act_cadastro_telefone_basico"
+        app:layout_constraintTop_toBottomOf="@+id/txtbCodigoVerificador_content_act_cadastro_telefone_basico" />
+
+    <Button
+        android:id="@+id/btnProsseguir_content_act_cadastro_telefone_basico"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/backgroundbuttongerenciador"
+        android:onClick="onClickbtnProsseguir_content_act_cadastro_telefone_basico"
+        android:text="PROSSEGUIR"
+        android:textColor="@color/colorwhite"
+        app:layout_constraintEnd_toEndOf="@+id/btnEnviarCodigo_content_act_cadastro_telefone_basico"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnEnviarCodigo_content_act_cadastro_telefone_basico"
+        app:layout_constraintTop_toBottomOf="@+id/btnEnviarCodigo_content_act_cadastro_telefone_basico" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

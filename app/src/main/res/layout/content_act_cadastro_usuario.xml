@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".softalert.View.ActCadastroUsuario"
+    tools:layout_editor_absoluteY="81dp"
+    tools:showIn="@layout/act_cadastro_usuario">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/txtbTelefone_content_act_cadastro_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                app:enabled="false"
+                app:iconSignifier="@drawable/baseline_contact_phone_white_24"
+                app:labelText="Número do Dispositivo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/txtTelefone_content_act_cadastro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="@string/apenasFormatoTelefone"
+                    android:imeOptions="actionNext"
+                    android:inputType="number|text"
+                    android:maxLength="15" />/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/txtbNome_content_act_cadastro_usuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:iconSignifier="@drawable/baseline_person_white_24"
+                app:labelText="Nome Completo"
+                app:layout_constraintEnd_toEndOf="@+id/txtbTelefone_content_act_cadastro_usuario"
+                app:layout_constraintStart_toStartOf="@+id/txtbTelefone_content_act_cadastro_usuario"
+                app:layout_constraintTop_toBottomOf="@+id/txtbTelefone_content_act_cadastro_usuario">
+
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/txtNome_content_act_cadastro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="@string/apenasLetras"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:maxLength="50" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/txtbDataNascimento_content_act_cadastro_usuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:digits=""
+                app:iconSignifier="@drawable/outline_date_range_white_24"
+                app:labelText="Data Nascimento"
+                app:layout_constraintEnd_toEndOf="@+id/txtbNome_content_act_cadastro_usuario"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtbNome_content_act_cadastro_usuario"
+                app:layout_constraintTop_toBottomOf="@+id/txtbNome_content_act_cadastro_usuario">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/txtDataNascimento_content_act_cadastro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="date" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/txtbCPF_content_act_cadastro_usuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="16dp"
+                app:helperText="* Não Obrigatório"
+                app:iconSignifier="@drawable/ic_account_card_details_white_24dp"
+                app:labelText="CPF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtbDataNascimento_content_act_cadastro_usuario"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtbDataNascimento_content_act_cadastro_usuario"
+                app:layout_constraintTop_toBottomOf="@+id/txtbDataNascimento_content_act_cadastro_usuario"
+                app:layout_constraintVertical_bias="1.0">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/txtCPF_content_act_cadastro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="@string/apenasFormatoCPF"
+                    android:imeOptions="actionDone"
+                    android:inputType="number|text"
+                    android:maxLength="14" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
