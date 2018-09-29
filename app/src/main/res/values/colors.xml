@@ -4,11 +4,5 @@
     <color name="colorPrimaryDark">#512da8</color>
     <color name="colorSecundary">#b39ddb</color>
     <color name="colorwhite">#fff</color>
-
-    <!--
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorSecundary">#9FA8DA</color>
-    <color name="colorwhite">#fff</color>
-    -->
+    <color name="colorWhiteSemiTransparent">#80ffffff</color>
 </resources>

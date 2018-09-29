@@ -23,7 +23,7 @@
         android:layout_gravity="start"
         android:background="@color/colorPrimary"
         app:tabMode="fixed"
-        app:tabTextColor="#29302E"
+        app:tabTextColor="@color/colorWhiteSemiTransparent"
         app:tabSelectedTextColor="@color/colorwhite"
         app:tabIndicatorColor="@color/colorwhite">
 
@@ -43,7 +43,7 @@
             android:id="@+id/tabLayoutActPrincipalItemPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PERFIL" />
+            android:text="ALERTAR" />
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
