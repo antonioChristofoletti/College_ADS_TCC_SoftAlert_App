@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".softalert.View.ActPrincipal"
+    tools:context=".softalert.View.ActPrincipal.ActPrincipal"
     tools:showIn="@layout/act_principal">
 
 </android.support.constraint.ConstraintLayout>

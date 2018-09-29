@@ -1,4 +1,4 @@
-package softalertv3.softalertv3.softalert.View;
+package softalertv3.softalertv3.softalert.View.ActPrincipal;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,13 +19,13 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0: {
-                return null;
+                return new FragActPrincipalNoticias();
             }
             case 1: {
-                return null;
+                return new FragActPrincipalDicas();
             }
             case 2: {
-                return null;
+                return new FragActPrincipalPerfil();
             }
             default: {
                 return null;

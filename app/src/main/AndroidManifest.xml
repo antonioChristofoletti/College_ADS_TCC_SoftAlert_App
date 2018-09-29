@@ -31,8 +31,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".softalert.View.ActPrincipal"
-            android:label="@string/title_activity_act_principal"
+            android:name=".softalert.View.ActPrincipal.ActPrincipal"
+            android:label="@string/SoftAlert"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
