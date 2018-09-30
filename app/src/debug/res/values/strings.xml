@@ -1,2 +1,8 @@
 <resources>
+
+    <string name="title_activity_testemap">Map</string>
+    <string name="title_activity_teste_map2">testeMap2</string>
+    <string name="title_activity_teste_maps">Map</string>
+    <string name="title_activity_teste_map_again">testeMapAgain</string>
+    <string name="title_activity_ActLocalizacoesUsuario">Meus Locais</string>
 </resources>

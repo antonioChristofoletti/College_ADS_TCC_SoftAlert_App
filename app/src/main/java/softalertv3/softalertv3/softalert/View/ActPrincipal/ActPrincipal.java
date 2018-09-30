@@ -1,6 +1,7 @@
 package softalertv3.softalertv3.softalert.View.ActPrincipal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,8 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import softalertv3.softalertv3.R;
+import softalertv3.softalertv3.softalert.View.ActPerfilUsuario.ActPerfilUsuario;
 
 public class ActPrincipal extends AppCompatActivity {
 
@@ -58,5 +61,19 @@ public class ActPrincipal extends AppCompatActivity {
         menuInflater.inflate(R.menu.act_principal_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.act_principal_menu_item_perfil: {
+                Intent intent = new Intent(this, ActPerfilUsuario.class);
+                startActivity(intent);
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

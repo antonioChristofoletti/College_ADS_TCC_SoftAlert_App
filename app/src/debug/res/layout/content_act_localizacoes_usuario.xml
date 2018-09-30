@@ -8,10 +8,65 @@
     tools:context=".softalert.View.ActLocalizacoesUsuario.ActLocalizacoesUsuario"
     tools:showIn="@layout/act_localizacoes_usuario">
 
-
-    <FrameLayout
-        android:id="@+id/FrameLayout_content_act_localizacoes_usuario"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:context="com.example.avinashk.rns.MapsActivity"
+        tools:layout="@layout/abc_action_bar_title_item" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:fab_colorNormal="@color/colorPrimary"
+        app:fab_colorPressed="@color/colorSecundary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu_colorNormal="@color/colorPrimary"
+        app:menu_colorPressed="@color/colorSecundary"
+        app:menu_labels_position="right">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorSecundary"
+            app:fab_colorRipple="@color/colorSecundary"
+            app:fab_label="Inserir Local"
+            app:fab_size="mini"
+            app:menu_colorNormal="@color/colorPrimary"
+            app:menu_colorPressed="@color/colorSecundary" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorSecundary"
+            app:fab_label="Editar Local"
+            app:fab_size="mini"
+            app:menu_colorNormal="@color/colorPrimary"
+            app:menu_colorPressed="@color/colorSecundary" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorSecundary"
+            app:fab_label="Remover Local"
+            app:fab_size="mini"
+            app:menu_colorNormal="@color/colorPrimary" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.constraint.ConstraintLayout>

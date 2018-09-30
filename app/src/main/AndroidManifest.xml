@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".softalert.View.ActCadastroUsuario"
             android:label="Cadastre-se"
@@ -27,20 +28,7 @@
         <activity
             android:name=".softalert.View.ActCadastro_telefone_basico"
             android:label="Autentique-se"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity
-            android:name=".softalert.View.ActPrincipal.ActPrincipal"
-            android:label="@string/SoftAlert"
             android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-
-
-        <activity
-            android:name=".softalert.View.ActPerfilUsuario.ActPerfilUsuario"
-            android:label="@string/title_activity_act_perfil_usuario"
-            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,8 +37,20 @@
         </activity>
 
         <activity
+            android:name=".softalert.View.ActPrincipal.ActPrincipal"
+            android:label="@string/SoftAlert"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".softalert.View.ActPerfilUsuario.ActPerfilUsuario"
+            android:label="@string/title_activity_act_perfil_usuario"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
             android:name=".softalert.View.ActLocalizacoesUsuario.ActLocalizacoesUsuario"
-            android:label="@string/title_activity_act_localizacoes_usuario"
+            android:label="@string/title_activity_ActLocalizacoesUsuario"
             android:theme="@style/AppTheme">
         </activity>
 
