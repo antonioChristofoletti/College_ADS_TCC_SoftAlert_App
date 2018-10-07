@@ -93,8 +93,7 @@ public abstract class Geral {
         return texto;
     }
 
-    public static String setaMascara(String valor, String mascara)
-    {
+    public static String setaMascara(String valor, String mascara) {
         StringBuilder stringModificada = new StringBuilder();
 
         for (int i=0; i < valor.length();i++){

@@ -2,6 +2,7 @@ package softalertv3.softalertv3.softalert.View;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,24 +27,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import softalertv3.softalertv3.softalert.View.ActPrincipal.ActPrincipal;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class ActCadastroUsuario extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, InterfaceListenerAPI {
 
-    public EditText txtCPF;
-    public EditText txtDataNascimento;
-    public EditText txtTelefone;
-    public EditText txtNome;
+    private EditText txtCPF;
+    private EditText txtDataNascimento;
+    private EditText txtTelefone;
+    private EditText txtNome;
 
-    public TextFieldBoxes txtbCPF;
-    public TextFieldBoxes txtbDataNascimento;
-    public TextFieldBoxes txtbTelefone;
-    public TextFieldBoxes txtbNome;
+    private TextFieldBoxes txtbCPF;
+    private TextFieldBoxes txtbDataNascimento;
+    private TextFieldBoxes txtbTelefone;
+    private TextFieldBoxes txtbNome;
 
     //Prevene que mais de 1 dateTimePicker seja invocado
     boolean dateTimePickerAtivado = false;
 
-    ProgressDialog progressDialog;
+    private UsuarioCliente usuarioClienteIncAlt;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,15 +113,16 @@ public class ActCadastroUsuario extends AppCompatActivity implements DatePickerD
 
     public void salvarUsuario() {
         try {
-            UsuarioCliente uc = new UsuarioCliente();
 
-            uc.setCpf(Geral.removerMascara(txtCPF.getText().toString()));
+            usuarioClienteIncAlt = new UsuarioCliente();
+
+            usuarioClienteIncAlt.setCpf(Geral.removerMascara(txtCPF.getText().toString()));
 
             Date dataNascimento = Geral.geraData("dd/MM/yyyy", Geral.removerMascara(txtDataNascimento.getText().toString()));
 
-            uc.setDataNascimento(dataNascimento);
+            usuarioClienteIncAlt.setDataNascimento(dataNascimento);
 
-            uc.setNome(txtNome.getText().toString());
+            usuarioClienteIncAlt.setNome(txtNome.getText().toString());
 
             ArrayList<Telefone> telefones = new ArrayList<Telefone>();
 
@@ -125,9 +130,9 @@ public class ActCadastroUsuario extends AppCompatActivity implements DatePickerD
             telefone.setTelefone(Geral.removerMascara(txtTelefone.getText().toString()));
             telefone.setStatus("A");
             telefones.add(telefone);
-            uc.setListaTelefones(telefones);
+            usuarioClienteIncAlt.setListaTelefones(telefones);
 
-            ErroValidacaoModel erroValidacaoModel = UsuarioClienteController.validarCamposUsuarioCliente(uc);
+            ErroValidacaoModel erroValidacaoModel = UsuarioClienteController.validarCamposUsuarioCliente(usuarioClienteIncAlt);
 
             if (erroValidacaoModel != null) {
                 processaErroValidacao(erroValidacaoModel);
@@ -139,7 +144,7 @@ public class ActCadastroUsuario extends AppCompatActivity implements DatePickerD
             progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
             progressDialog.show();
 
-            UsuarioClienteController.inserir(uc,this);
+            UsuarioClienteController.inserirAPI(usuarioClienteIncAlt,this);
 
         } catch (Exception ex) {
             Geral.chamarAlertDialog(this, "Erro", ex.getMessage());
@@ -178,8 +183,17 @@ public class ActCadastroUsuario extends AppCompatActivity implements DatePickerD
     @Override
     public void retornaMensagemSucesso(String mensagem) {
         progressDialog.cancel();
+        try {
+            usuarioClienteIncAlt = UsuarioClienteController.retornaUsuarioClienteInserirAPI();
+            UsuarioClienteController.inserirDAOInterno(usuarioClienteIncAlt);
 
-        Geral.chamarAlertDialog(this, "",mensagem);
+            Intent intent = new Intent(this, ActPrincipal.class);
+            startActivity(intent);
+
+            finish();
+        }catch (Exception ex){
+            Geral.chamarAlertDialog(this,"Erro", "Erro ao realizar inserir as informações internamente. Erro: " + ex.getMessage());
+        }
     }
 
     @Override

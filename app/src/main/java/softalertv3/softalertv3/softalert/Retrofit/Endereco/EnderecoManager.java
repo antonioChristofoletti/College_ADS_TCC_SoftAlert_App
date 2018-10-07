@@ -1,13 +1,15 @@
-package softalertv3.softalertv3.softalert.Retrofit.UsuarioCliente;
+package softalertv3.softalertv3.softalert.Retrofit.Endereco;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAPI;
+import softalertv3.softalertv3.softalert.Model.Endereco;
 import softalertv3.softalertv3.softalert.Model.RequisicaoEnvioSMS;
 import softalertv3.softalertv3.softalert.Model.UsuarioCliente;
 import softalertv3.softalertv3.softalert.Retrofit.ErrorMessageAPI;
@@ -15,33 +17,32 @@ import softalertv3.softalertv3.softalert.Retrofit.JSONManager;
 import softalertv3.softalertv3.softalert.Retrofit.RetrofitConfig;
 import softalertv3.softalertv3.softalert.Retrofit.Token.TokenManager;
 
-public class UsuarioClienteManager implements InterfaceListenerAPI {
+public class EnderecoManager implements InterfaceListenerAPI {
 
     private static Object respostaErro;
     private static String respostaSucesso;
 
     private static UsuarioCliente usuarioCliente;
-    private RequisicaoEnvioSMS requisicaoEnvioSMS;
 
     private InterfaceListenerAPI interfaceListenerAPI;
 
     private String metodoCentral = "";
 
-    public void inserirUsuario(UsuarioCliente usuarioCliente, InterfaceListenerAPI interfaceListenerAPI) {
+    public static ArrayList<Endereco> listaEnderecos;
+
+    public void inserirEnderecos(UsuarioCliente usuarioCliente, InterfaceListenerAPI interfaceListenerAPI) {
 
         this.usuarioCliente = usuarioCliente;
 
         this.interfaceListenerAPI = interfaceListenerAPI;
 
-        metodoCentral = "inserirUsuario";
+        metodoCentral = "inserirEnderecos";
 
         TokenManager.retornaToken(this);
     }
 
-    public void inserirUsuarioInterno(String token) {
-        Call<UsuarioCliente> call = new RetrofitConfig().getUsuarioClienteService().inserirUsuarioCliente(usuarioCliente, "Bearer " + token);
-
-        String aux = JSONManager.convertJSON(usuarioCliente);
+    public void inserirEnderecosInternos(String token) {
+        Call<UsuarioCliente> call = new RetrofitConfig().getEnderecoUsuarioClienteService().inseriEndereco(usuarioCliente, "Bearer " + token);
 
         call.enqueue(new Callback<UsuarioCliente>() {
             @Override
@@ -49,26 +50,30 @@ public class UsuarioClienteManager implements InterfaceListenerAPI {
 
                 if (!response.isSuccessful()) {
 
-                    ObjectMapper om = new ObjectMapper();
+                        if(response.code() == 201)
+                        {
+                            interfaceListenerAPI.retornaMensagemErro("");
+                            return;
+                        }
 
-                    ErrorMessageAPI emAPI = null;
-                    try {
-                        emAPI = JSONManager.convertJsonToErrorMessageAPI(response.errorBody().string());
-                    } catch (IOException e) {
-                        emAPI = null;
-                    }
+                        ObjectMapper om = new ObjectMapper();
 
-                    if (emAPI != null) {
-                        interfaceListenerAPI.retornaMensagemErro(emAPI.getErrorMessage());
-                        return;
+                        ErrorMessageAPI emAPI = null;
+                        try {
+                            emAPI = JSONManager.convertJsonToErrorMessageAPI(response.errorBody().string());
+                        } catch (IOException e) {
+                            emAPI = null;
+                        }
+
+                        if (emAPI != null) {
+                            interfaceListenerAPI.retornaMensagemErro(emAPI.getErrorMessage());
+                            return;
                     }
 
                     String error = "Erro ao inserir. Código de erro HTTP " + response.code();
                     interfaceListenerAPI.retornaMensagemErro(error);
                     return;
                 }
-
-                usuarioCliente = response.body();
 
                 interfaceListenerAPI.retornaMensagemSucesso("Cadastro efetuado com sucesso");
             }
@@ -85,27 +90,32 @@ public class UsuarioClienteManager implements InterfaceListenerAPI {
         });
     }
 
-    public void enviarSMSAutenticacao(RequisicaoEnvioSMS requisicaoEnvioSMS, InterfaceListenerAPI interfaceListenerAPI) {
+    public void retornaEnderecos(UsuarioCliente usuarioCliente, InterfaceListenerAPI interfaceListenerAPI) {
 
-        this.requisicaoEnvioSMS = requisicaoEnvioSMS;
+        this.usuarioCliente = usuarioCliente;
 
         this.interfaceListenerAPI = interfaceListenerAPI;
 
-        metodoCentral = "enviarSMSAutenticacao";
+        metodoCentral = "retornaEnderecos";
 
         TokenManager.retornaToken(this);
     }
 
-    public void enviarSMSAutenticacaoInterno(String token) {
-        Call<RequisicaoEnvioSMS> call = new RetrofitConfig().getUsuarioClienteService().enviarSMS(requisicaoEnvioSMS, "Bearer " + token);
+    public void retornaEnderecosInternos(String token) {
+        Call<ArrayList<Endereco>> call = new RetrofitConfig().getEnderecoUsuarioClienteService().retornaEnderecos(usuarioCliente.getId(), "Bearer " + token);
 
-        String aux = JSONManager.convertJSON(requisicaoEnvioSMS);
-
-        call.enqueue(new Callback<RequisicaoEnvioSMS>() {
+        call.enqueue(new Callback<ArrayList<Endereco>>() {
             @Override
-            public void onResponse(Call<RequisicaoEnvioSMS> call, Response<RequisicaoEnvioSMS> response) {
+            public void onResponse(Call<ArrayList<Endereco>> call, Response<ArrayList<Endereco>> response) {
 
                 if (!response.isSuccessful()) {
+
+                    if(response.code() == 404)
+                    {
+                        listaEnderecos = new ArrayList<>();
+                        interfaceListenerAPI.retornaMensagemSucesso("");
+                        return;
+                    }
 
                     ObjectMapper om = new ObjectMapper();
 
@@ -126,12 +136,19 @@ public class UsuarioClienteManager implements InterfaceListenerAPI {
                     return;
                 }
 
-                interfaceListenerAPI.retornaMensagemSucesso("SMS enviado com sucesso");
+                if(response.code() == 200)
+                {
+                    listaEnderecos = response.body();
+                    interfaceListenerAPI.retornaMensagemSucesso("");
+                    return;
+                }
+
+                interfaceListenerAPI.retornaMensagemSucesso("Cadastro efetuado com sucesso");
             }
 
             @Override
-            public void onFailure(Call<RequisicaoEnvioSMS> call, Throwable t) {
-                String error = "Erro ao enviar SMS";
+            public void onFailure(Call<ArrayList<Endereco>> call, Throwable t) {
+                String error = "Erro ao inserir.";
 
                 if (t.getMessage() != null)
                     error += t.getMessage();
@@ -145,12 +162,13 @@ public class UsuarioClienteManager implements InterfaceListenerAPI {
     public void retornaMensagemSucesso(String mensagem) {
 
         switch (metodoCentral) {
-            case "inserirUsuario": {
-                inserirUsuarioInterno(mensagem);
+            case "inserirEnderecos": {
+                inserirEnderecosInternos(mensagem);
                 break;
             }
-            case "enviarSMSAutenticacao": {
-                enviarSMSAutenticacaoInterno(mensagem);
+
+            case "retornaEnderecos" :{
+                retornaEnderecosInternos(mensagem);
                 break;
             }
         }
@@ -160,14 +178,5 @@ public class UsuarioClienteManager implements InterfaceListenerAPI {
     @Override
     public void retornaMensagemErro(String mensagem) {
         interfaceListenerAPI.retornaMensagemErro(mensagem);
-    }
-
-
-    public static UsuarioCliente getUsuarioCliente() {
-        return usuarioCliente;
-    }
-
-    public static void setUsuarioCliente(UsuarioCliente usuarioCliente) {
-        UsuarioClienteManager.usuarioCliente = usuarioCliente;
     }
 }

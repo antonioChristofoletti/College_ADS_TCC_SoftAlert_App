@@ -1,15 +1,42 @@
 package softalertv3.softalertv3.softalert.Model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Endereco {
 
+    @JsonIgnore
     private int id;
-    
-    private String complemento;
-    
-    private String rua;
-    private String bairro;
-    private String numero;
+
+    private String pais;
+    private String estado;
+    private String cidade;
+    private String endereco;
+
+    private double latitude;
+    private double longitude;
+
+    private String nomeLocal;
+
     private String status;
+
+    private Usuario usuario;
+
+    public Endereco() {
+    }
+
+    public Endereco(int id, String pais, String estado, String cidade, String endereco, double latitude, double longitude, String nomeLocal, String status, Usuario usuario) {
+        this.id = id;
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.endereco = endereco;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.nomeLocal = nomeLocal;
+        this.status = status;
+        this.usuario = usuario;
+    }
 
     public int getId() {
         return id;
@@ -19,36 +46,68 @@ public class Endereco {
         this.id = id;
     }
 
-    public String getComplemento() {
-        return complemento;
+    public String getPais() {
+        return pais;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
-    public String getRua() {
-        return rua;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getNomeLocal() {
+        return nomeLocal;
+    }
+
+    public void setNomeLocal(String nomeLocal) {
+        this.nomeLocal = nomeLocal;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getStatus() {

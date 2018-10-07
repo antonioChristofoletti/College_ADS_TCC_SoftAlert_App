@@ -15,10 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.avinashk.rns.MapsActivity"
-        tools:layout="@layout/abc_action_bar_title_item" />
+        tools:layout="@layout/abc_action_bar_title_item"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="82dp" />
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu"
+        android:id="@+id/FloatingActionMenuMapa_content_act_localizacoes_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -35,7 +37,7 @@
         app:menu_labels_position="right">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item"
+            android:id="@+id/FloatingActionMenuMapa_Item_Inserir_content_act_localizacoes_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
@@ -44,10 +46,12 @@
             app:fab_label="Inserir Local"
             app:fab_size="mini"
             app:menu_colorNormal="@color/colorPrimary"
-            app:menu_colorPressed="@color/colorSecundary" />
+            app:menu_colorPressed="@color/colorSecundary"
+            android:src="@drawable/baseline_add_location_white_24"
+            android:onClick="FloatingActionMenuMapa_Item_Inserir_content_act_localizacoes_usuario_onClick"/>
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item2"
+            android:id="@+id/FloatingActionMenuMapa_Item_Editar_content_act_localizacoes_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
@@ -55,17 +59,21 @@
             app:fab_label="Editar Local"
             app:fab_size="mini"
             app:menu_colorNormal="@color/colorPrimary"
-            app:menu_colorPressed="@color/colorSecundary" />
+            app:menu_colorPressed="@color/colorSecundary"
+            android:src="@drawable/baseline_edit_location_white_24"
+            android:onClick="FloatingActionMenuMapa_Item_Editar_content_act_localizacoes_usuario_onClick"/>
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item1"
+            android:id="@+id/FloatingActionMenuMapa_Item_Remover_Inserir_content_act_localizacoes_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
             app:fab_colorPressed="@color/colorSecundary"
             app:fab_label="Remover Local"
             app:fab_size="mini"
-            app:menu_colorNormal="@color/colorPrimary" />
+            app:menu_colorNormal="@color/colorPrimary"
+            android:src="@drawable/baseline_location_off_white_24"
+            android:onClick="FloatingActionMenuMapa_Item_Remover_content_act_localizacoes_usuario_onClick"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

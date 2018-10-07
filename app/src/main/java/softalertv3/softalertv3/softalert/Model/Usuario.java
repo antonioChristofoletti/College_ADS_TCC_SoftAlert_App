@@ -24,6 +24,9 @@ public abstract class Usuario {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private ArrayList<Telefone> listaTelefones;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private ArrayList<Endereco> listaEnderecos;
+
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -70,5 +73,13 @@ public abstract class Usuario {
 
     public void setListaTelefones(ArrayList<Telefone> listaTelefones) {
         this.listaTelefones = listaTelefones;
+    }
+
+    public ArrayList<Endereco> getListaEnderecos() {
+        return listaEnderecos;
+    }
+
+    public void setListaEnderecos(ArrayList<Endereco> listaEnderecos) {
+        this.listaEnderecos = listaEnderecos;
     }
 }

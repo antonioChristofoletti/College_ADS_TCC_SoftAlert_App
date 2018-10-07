@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import softalertv3.softalertv3.R;
+import softalertv3.softalertv3.softalert.DAOInterno.DadosOpenHelper;
 import softalertv3.softalertv3.softalert.View.ActPerfilUsuario.ActPerfilUsuario;
 
 public class ActPrincipal extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class ActPrincipal extends AppCompatActivity {
         setContentView(R.layout.act_principal);
         toolbar = (Toolbar) findViewById(R.id.toolbarActPrincipal);
         setSupportActionBar(toolbar);
+
+        DadosOpenHelper.criarconexao(this);
 
         configuraComponentes();
     }

@@ -2,6 +2,7 @@ package softalertv3.softalertv3.softalert.Retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
+import softalertv3.softalertv3.softalert.Retrofit.Endereco.EnderecoService;
 import softalertv3.softalertv3.softalert.Retrofit.Token.TokenService;
 import softalertv3.softalertv3.softalert.Retrofit.UsuarioCliente.UsuarioClienteService;
 
@@ -18,6 +19,10 @@ public class RetrofitConfig {
 
     public UsuarioClienteService getUsuarioClienteService() {
         return this.retrofit.create(UsuarioClienteService.class);
+    }
+
+    public EnderecoService getEnderecoUsuarioClienteService() {
+        return this.retrofit.create(EnderecoService.class);
     }
 
     public TokenService getTokenService() {
