@@ -25,7 +25,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return new FragActPrincipalDicas();
             }
             case 2: {
-                return new FragActPrincipalPerfil();
+                return new FragActPrincipalAlertar();
             }
             default: {
                 return null;

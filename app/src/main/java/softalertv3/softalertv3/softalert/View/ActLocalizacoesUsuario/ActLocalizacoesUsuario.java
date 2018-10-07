@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ZoomControls;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -69,27 +68,31 @@ public class ActLocalizacoesUsuario extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        configurarComponentes();
+
+        listaEnderecos = new ArrayList<>();
+        listaMarkers = new ArrayList<>();
+    }
+
+    //region METODOS
+
+    public void configurarComponentes() {
         txtPesquisaMapa = (EditText) findViewById(R.id.txtPesquisaMapa_content_act_localizacoes_usuario);
 
         txtPesquisaMapa.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || actionId == KeyEvent.ACTION_DOWN
-                        || actionId == KeyEvent.KEYCODE_ENTER
-                        )
-                {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
+                        || actionId == KeyEvent.ACTION_DOWN || actionId == KeyEvent.KEYCODE_ENTER) {
                     String pesquisaMapa = txtPesquisaMapa.getText().toString();
 
-                    Geocoder geocoder =  new Geocoder(ActLocalizacoesUsuario.this);
+                    Geocoder geocoder = new Geocoder(ActLocalizacoesUsuario.this);
                     List<Address> listaEnderecos = new ArrayList<>();
 
-                    try{
+                    try {
                         listaEnderecos = geocoder.getFromLocationName(pesquisaMapa, 1);
 
-                        if(listaEnderecos.size() > 0)
-                        {
+                        if (listaEnderecos.size() > 0) {
                             Address address = listaEnderecos.get(0);
 
                             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
@@ -97,24 +100,24 @@ public class ActLocalizacoesUsuario extends AppCompatActivity
                             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, 16);
                             mMap.moveCamera(update);
                         }
+                        else
+                        {
+                            Toast.makeText(ActLocalizacoesUsuario.this, "Nenhum endereço encontrado", Toast.LENGTH_SHORT).show();
+                        }
 
-                    }catch (Exception e){
-
+                    } catch (Exception e) {
+                        Toast.makeText(ActLocalizacoesUsuario.this, "Nenhum endereço encontrado", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 return false;
             }
         });
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
-
-        listaEnderecos = new ArrayList<>();
-        listaMarkers = new ArrayList<>();
     }
-
-    //region METODOS
 
     public void buscaPermissao_ACCESS_FINE_LOCATION() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
