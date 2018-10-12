@@ -5,4 +5,6 @@
     <color name="colorSecundary">#b39ddb</color>
     <color name="colorwhite">#fff</color>
     <color name="colorWhiteSemiTransparent">#80ffffff</color>
+    <color name="colorBackgroundComponentsMaterialDesign">#EBEBEB</color>
+    <color name="colorBackgroundIconsNaoSelecionadosMaterialDesign">#B3B3B3</color>
 </resources>

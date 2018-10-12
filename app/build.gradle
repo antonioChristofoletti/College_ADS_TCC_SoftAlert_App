@@ -26,12 +26,16 @@ dependencies {
     /*CORRECAO BUG DE UI*/
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
 
     /*TEXT FIELD MATERIAL DESIGN = https://github.com/HITGIF/TextFieldBoxes*/
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.4'
 
     /*FAB WITH OPTIONS = https://github.com/Clans/FloatingActionButton*/
     implementation 'com.github.clans:fab:1.6.4'
+
+    /*SPINNER = https://github.com/jaredrummler/MaterialSpinner*/
+    implementation 'com.jaredrummler:material-spinner:1.2.5'
 
     /*CONSUMO API*/
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'

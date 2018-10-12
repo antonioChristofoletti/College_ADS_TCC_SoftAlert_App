@@ -6,6 +6,102 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".softalert.View.ActAlertaCadastro"
+    tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/act_alerta_cadastro">
+
+    <ImageView
+        android:id="@+id/ImageSpinnerEvento_content_act_alerta_cadastro"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:tint="@color/colorBackgroundIconsNaoSelecionadosMaterialDesign"
+        android:src="@drawable/ic_weather_lightning_rainy_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView4" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorBackgroundComponentsMaterialDesign"
+        app:cardBackgroundColor="@color/colorBackgroundComponentsMaterialDesign"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ImageSpinnerEvento_content_act_alerta_cadastro"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            app:ms_arrow_tint="@color/colorPrimary"
+            app:ms_hint_color="@color/colorPrimary"
+            app:ms_background_color="@color/colorBackgroundComponentsMaterialDesign"/>
+    </android.support.v7.widget.CardView>
+
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/txtbTelefone_content_act_cadastro_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:enabled="false"
+        app:iconSignifier="@drawable/baseline_contact_phone_white_24"
+        app:labelText="Número do Dispositivo"
+        app:layout_constraintEnd_toEndOf="@+id/cardView4"
+        app:layout_constraintStart_toStartOf="@+id/ImagePesquisa_content_act_localizacoes_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/cardView4">
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/txtTelefone_content_act_cadastro_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="@string/apenasFormatoTelefone"
+            android:imeOptions="actionNext"
+            android:inputType="number|text"
+            android:maxLength="15" />/>
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:id="@+id/txtbNome_content_act_cadastro_usuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:iconSignifier="@drawable/baseline_person_white_24"
+        app:labelText="Nome Completo"
+        app:layout_constraintEnd_toEndOf="@+id/txtbTelefone_content_act_cadastro_usuario"
+        app:layout_constraintStart_toStartOf="@+id/txtbTelefone_content_act_cadastro_usuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtbTelefone_content_act_cadastro_usuario">
+
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/txtNome_content_act_cadastro_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="@string/apenasLetras"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLength="50" />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
 </android.support.constraint.ConstraintLayout>
