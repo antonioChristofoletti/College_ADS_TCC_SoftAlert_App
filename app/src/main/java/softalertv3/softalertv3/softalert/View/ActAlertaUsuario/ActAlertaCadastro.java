@@ -2,6 +2,8 @@ package softalertv3.softalertv3.softalert.View.ActAlertaUsuario;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.Marker;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import softalertv3.softalertv3.R;
 import softalertv3.softalertv3.softalert.Controller.AlertaUsuarioClienteController;
@@ -28,10 +30,8 @@ import softalertv3.softalertv3.softalert.Model.AlertaUsuarioCliente;
 import softalertv3.softalertv3.softalert.Model.Endereco;
 import softalertv3.softalertv3.softalert.Model.ErroValidacaoModel;
 import softalertv3.softalertv3.softalert.Model.UsuarioCliente;
-import softalertv3.softalertv3.softalert.Retrofit.AlertaUsuarioCliente.AlertaUsuarioClienteManager;
 import softalertv3.softalertv3.softalert.Uteis.Geral;
 import softalertv3.softalertv3.softalert.Uteis.SpinnerControl;
-import softalertv3.softalertv3.softalert.View.ActCadastroUsuario;
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
 public class ActAlertaCadastro extends AppCompatActivity implements InterfaceListenerAPI {
@@ -41,15 +41,20 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
 
     private EditText txtDescricao;
     private EditText txtLocal;
+    private EditText txtDescricaoVeracidade;
 
     private TextFieldBoxes txtBDescricao;
     private TextFieldBoxes txtBLocal;
+    private TextFieldBoxes txtBDescricaoVeracidade;
 
     private Endereco enderecoSelecionado;
 
-    private Marker marker;
-
     private ProgressDialog progressDialog;
+
+    private Boolean visualizacaoAlertaApenas;
+    private AlertaUsuarioCliente alertaUsuarioCliente;
+
+    private Boolean primeiroFocoLocalDOEvento = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,9 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
         setSupportActionBar(toolbar);
 
         configurarComponentes();
+
+        configurarComponentesVisualizarApenas();
+
     }
 
     //region METODOS
@@ -70,6 +78,12 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
 
         txtDescricao = (EditText) findViewById(R.id.txtDescricao_content_act_alerta_cadastro);
         txtBDescricao = (TextFieldBoxes) findViewById(R.id.txtbDescricao_content_act_alerta_cadastro);
+
+        txtDescricaoVeracidade = (EditText) findViewById(R.id.txtDescricaoVeracidade_content_act_alerta_cadastro);
+        txtBDescricaoVeracidade = (TextFieldBoxes) findViewById(R.id.txtbDescricaoVeracidade_content_act_alerta_cadastro);
+
+        txtDescricaoVeracidade.setEnabled(false);
+        txtBDescricaoVeracidade.setEnabled(false);
 
         txtLocal = (EditText) findViewById(R.id.txtLocal_content_act_alerta_cadastro);
         txtBLocal = (TextFieldBoxes) findViewById(R.id.txtbLocal_content_act_alerta_cadastro);
@@ -105,12 +119,56 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
         });
     }
 
-    public void chamaActivityPesquisarEndereco() {
-        Intent intent = new Intent(ActAlertaCadastro.this, ActLocalizacaoAlerta.class);
+    public void configurarComponentesVisualizarApenas() {
 
-        intent.putExtra("enderecoSelecionado",  enderecoSelecionado);
+        visualizacaoAlertaApenas = false;
 
-        startActivity(intent);
+        String visualizacaoAlertaApenasAux = getIntent().getStringExtra("visualizacaoAlertaApenas");
+
+        if (visualizacaoAlertaApenasAux != null)
+            visualizacaoAlertaApenas = Boolean.parseBoolean(visualizacaoAlertaApenasAux);
+        else
+            visualizacaoAlertaApenas = false;
+
+        if (visualizacaoAlertaApenas) {
+            spinnerMinhaSituacao.setEnabled(false);
+            spinnerDesastreAvistado.setEnabled(false);
+
+            txtBDescricao.setEnabled(false);
+            txtDescricao.setEnabled(false);
+
+            this.setTitle("Detalhes Alerta");
+
+            alertaUsuarioCliente = (AlertaUsuarioCliente) getIntent().getSerializableExtra("alertaUsuarioCliente");
+
+            int i = 0;
+            for (Object item : spinnerDesastreAvistado.getItems()) {
+                if (item.equals(alertaUsuarioCliente.getDesastreAvistado()))
+                    spinnerDesastreAvistado.setSelectedIndex(i);
+                i++;
+            }
+
+            i = 0;
+            for (Object item : spinnerMinhaSituacao.getItems()) {
+                if (item.equals(alertaUsuarioCliente.getSituacaoUsuario()))
+                    spinnerMinhaSituacao.setSelectedIndex(i);
+                i++;
+            }
+
+            txtDescricao.setText(alertaUsuarioCliente.getDescricao());
+
+            if (alertaUsuarioCliente.getVeracidade() != null) {
+                txtDescricaoVeracidade.setText(alertaUsuarioCliente.getDescricaoVeracidade());
+            }
+
+            encontrarEndereco(alertaUsuarioCliente.getLatitude(), alertaUsuarioCliente.getLongitude());
+
+            txtLocal.setText(enderecoSelecionado.getEndereco());
+            ActLocalizacaoAlerta.enderecoSelecionado = enderecoSelecionado;
+        } else {
+            txtDescricaoVeracidade.setVisibility(View.INVISIBLE);
+            txtBDescricaoVeracidade.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void configurarSpinnerDesastreAvistado() {
@@ -148,6 +206,21 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
         spinnerControl.configurarSpinnerControl(true, spinnerMinhaSituacao, iv, lista, corSelecionada, corNaoSelecionada);
     }
 
+    public void chamaActivityPesquisarEndereco() {
+
+        if (!primeiroFocoLocalDOEvento && visualizacaoAlertaApenas) {
+            primeiroFocoLocalDOEvento = true;
+            return;
+        }
+
+        Intent intent = new Intent(ActAlertaCadastro.this, ActLocalizacaoAlerta.class);
+
+        intent.putExtra("enderecoSelecionado", enderecoSelecionado);
+        intent.putExtra("visualizacaoAlertaApenas", visualizacaoAlertaApenas.toString());
+
+        startActivity(intent);
+    }
+
     public void processaErroValidacao(ErroValidacaoModel erroValidacaoModel){
 
         if(erroValidacaoModel.getCampoErro().equals("desastreAvistado"))
@@ -178,7 +251,6 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
     }
 
     public void finalizar() {
-
         try {
             AlertaUsuarioCliente alertaUsuarioCliente = new AlertaUsuarioCliente();
 
@@ -188,14 +260,11 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
 
             alertaUsuarioCliente.setDescricao(txtDescricao.getText().toString());
 
-            if(enderecoSelecionado != null)
+            if (enderecoSelecionado != null)
                 alertaUsuarioCliente.setLatitude(enderecoSelecionado.getLatitude());
 
-            if(enderecoSelecionado != null)
+            if (enderecoSelecionado != null)
                 alertaUsuarioCliente.setLongitude(enderecoSelecionado.getLongitude());
-
-            alertaUsuarioCliente.setLongitude(20);
-            alertaUsuarioCliente.setLatitude(20);
 
             ErroValidacaoModel erroValidacaoModel = AlertaUsuarioClienteController.validarCampos(alertaUsuarioCliente);
 
@@ -214,10 +283,44 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
 
             alertaUsuarioCliente.setIdUsuarioCliente(uc.getId());
 
-            AlertaUsuarioClienteController.inserirAPI(alertaUsuarioCliente,this);
+            AlertaUsuarioClienteController.inserirAPI(alertaUsuarioCliente, this);
         } catch (Exception ex) {
             Geral.chamarAlertDialog(this, "Erro", ex.getMessage());
         }
+    }
+
+    public boolean encontrarEndereco(double latitude, double longitude) {
+        try {
+            Geocoder geo = new Geocoder(ActAlertaCadastro.this.getApplicationContext(), Locale.getDefault());
+
+            List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
+            if (addresses.isEmpty()) {
+                Geral.chamarAlertDialog(this, "Mensagem", "Nenhum endereço válido foi encontrado para esse local");
+
+                return false;
+            } else {
+                if (addresses.size() <= 0) {
+                    Geral.chamarAlertDialog(this, "Mensagem", "Nenhum endereço válido foi encontrado para esse local");
+                    return false;
+                }
+
+                Address a = addresses.get(0);
+
+                enderecoSelecionado = new Endereco();
+                enderecoSelecionado.setCidade(a.getSubAdminArea());
+                enderecoSelecionado.setEndereco(a.getAddressLine(0));
+                enderecoSelecionado.setEstado(a.getAdminArea());
+                enderecoSelecionado.setLatitude(latitude);
+                enderecoSelecionado.setLongitude(longitude);
+                enderecoSelecionado.setPais(a.getCountryName());
+                enderecoSelecionado.setStatus("A");
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Erro ao encontrar o endereço de tal local. Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 
     //endregion
@@ -226,8 +329,10 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.act_autenticacao_menu, menu);
+        if (!visualizacaoAlertaApenas) {
+            MenuInflater menuInflater = getMenuInflater();
+            menuInflater.inflate(R.menu.act_autenticacao_menu, menu);
+        }
 
         return super.onCreateOptionsMenu(menu);
     }

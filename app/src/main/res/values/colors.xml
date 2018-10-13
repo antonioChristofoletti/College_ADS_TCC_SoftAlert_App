@@ -8,4 +8,10 @@
     <color name="colorWhiteSemiTransparent">#80ffffff</color>
     <color name="colorBackgroundComponentsMaterialDesign">#EBEBEB</color>
     <color name="colorBackgroundIconsNaoSelecionadosMaterialDesign">#B3B3B3</color>
+
+
+
+    <color name="eventoCancelado_NaoAprovado">#D50000</color>
+    <color name="eventoAguardando">#1565C0</color>
+    <color name="eventoValidado">#4CAF50</color>
 </resources>

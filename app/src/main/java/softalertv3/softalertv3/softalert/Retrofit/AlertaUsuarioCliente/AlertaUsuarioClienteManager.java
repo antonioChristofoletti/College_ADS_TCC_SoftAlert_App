@@ -97,6 +97,8 @@ public class AlertaUsuarioClienteManager implements InterfaceListenerAPI {
 
     //endregion
 
+    //region retornaAlertas
+
     public void retornaAlertas(UsuarioCliente usuarioCliente, InterfaceListenerAPI interfaceListenerAPI) {
 
         this.usuarioCliente = usuarioCliente;
@@ -165,6 +167,76 @@ public class AlertaUsuarioClienteManager implements InterfaceListenerAPI {
         });
     }
 
+    //endregion
+
+    //region editarAlertaUsuarioCliente
+
+    public void editarAlertaUsuarioCliente(AlertaUsuarioCliente alertaUsuarioCliente, InterfaceListenerAPI interfaceListenerAPI) {
+
+        this.alertaUsuarioCliente = alertaUsuarioCliente;
+
+        this.interfaceListenerAPI = interfaceListenerAPI;
+
+        metodoCentral = "editarAlertaUsuarioCliente";
+
+        TokenManager.retornaToken(this);
+    }
+
+    public void editarAlertaUsuarioClienteInterno(String token) {
+
+        Call<AlertaUsuarioCliente> call = new RetrofitConfig().getAlertaUsuarioCliente().editarEnderecoUsuarioAdministrador(this.alertaUsuarioCliente, "Bearer " + token);
+
+
+        String aux = JSONManager.convertJSON(alertaUsuarioCliente);
+
+        call.enqueue(new Callback<AlertaUsuarioCliente>() {
+            @Override
+            public void onResponse(Call<AlertaUsuarioCliente> call, Response<AlertaUsuarioCliente> response) {
+
+                if (!response.isSuccessful()) {
+
+                    if(response.code() == 200)
+                    {
+                        interfaceListenerAPI.retornaMensagemErro("");
+                        return;
+                    }
+
+                    ObjectMapper om = new ObjectMapper();
+
+                    ErrorMessageAPI emAPI = null;
+                    try {
+                        emAPI = JSONManager.convertJsonToErrorMessageAPI(response.errorBody().string());
+                    } catch (IOException e) {
+                        emAPI = null;
+                    }
+
+                    if (emAPI != null) {
+                        interfaceListenerAPI.retornaMensagemErro(emAPI.getErrorMessage());
+                        return;
+                    }
+
+                    String error = "Erro ao editar. Código de erro HTTP " + response.code();
+                    interfaceListenerAPI.retornaMensagemErro(error);
+                    return;
+                }
+
+                interfaceListenerAPI.retornaMensagemSucesso("Edição realizada com sucesso");
+            }
+
+            @Override
+            public void onFailure(Call<AlertaUsuarioCliente> call, Throwable t) {
+                String error = "Erro ao editar.";
+
+                if (t.getMessage() != null)
+                    error += t.getMessage();
+
+                interfaceListenerAPI.retornaMensagemErro(error);
+            }
+        });
+    }
+
+    //endregion
+
     @Override
     public void retornaMensagemSucesso(String mensagem) {
 
@@ -176,6 +248,11 @@ public class AlertaUsuarioClienteManager implements InterfaceListenerAPI {
 
             case "retornaAlertas":{
                 retornaAlertasInternos(mensagem);
+                break;
+            }
+
+            case "editarAlertaUsuarioCliente":{
+                editarAlertaUsuarioClienteInterno(mensagem);
                 break;
             }
         }

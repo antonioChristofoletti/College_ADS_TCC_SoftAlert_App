@@ -3,11 +3,11 @@ package softalertv3.softalertv3.softalert.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AlertaUsuarioCliente {
+public class AlertaUsuarioCliente implements Serializable{
 
-    @JsonIgnore
     private int id;
 
     private String desastreAvistado;

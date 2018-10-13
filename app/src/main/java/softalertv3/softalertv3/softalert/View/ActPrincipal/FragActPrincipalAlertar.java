@@ -45,20 +45,24 @@ public class FragActPrincipalAlertar extends Fragment implements InterfaceListen
         });
 
         listViewAlertas = (ListView) view.findViewById(R.id.frag_act_principa_alertar_listView);
-        UsuarioCliente uc = UsuarioClienteController.retornaUsuarioClienteDAOInterno();
-        AlertaUsuarioClienteController.retornaAlertas(uc,this);
+        atualizarListViewAlertasUsuario();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
+        atualizarListViewAlertasUsuario();
+    }
+
+    public void atualizarListViewAlertasUsuario() {
         UsuarioCliente uc = UsuarioClienteController.retornaUsuarioClienteDAOInterno();
-        AlertaUsuarioClienteController.retornaAlertas(uc,this);
+        AlertaUsuarioClienteController.retornaAlertas(uc, this);
     }
 
     public void FloatingActionMenuAdicionarNoticias_Inserir_content_act_localizacoes_usuario_onClick() {
         Intent intent = new Intent(this.getContext(), ActAlertaCadastro.class);
+        intent.putExtra("visualizacaoAlertaApenas","false");
         startActivity(intent);
     }
 
@@ -71,7 +75,7 @@ public class FragActPrincipalAlertar extends Fragment implements InterfaceListen
         if (lista == null)
             return;
 
-        FragActPrincipalAlertarAdapter adapter = new FragActPrincipalAlertarAdapter(((ActPrincipal)getActivity()), lista);
+        FragActPrincipalAlertarAdapter adapter = new FragActPrincipalAlertarAdapter(((ActPrincipal)getActivity()), this, lista);
 
         listViewAlertas.setAdapter(adapter);
     }

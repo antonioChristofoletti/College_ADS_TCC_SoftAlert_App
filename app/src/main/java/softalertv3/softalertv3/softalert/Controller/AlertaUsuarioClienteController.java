@@ -16,6 +16,11 @@ public class AlertaUsuarioClienteController {
         alertaUsuarioClienteManager.inserirAlertaUsuarioCliente(alertaUsuarioCliente, interfaceListenerAPI);
     }
 
+    public static void editarAPI(AlertaUsuarioCliente alertaUsuarioCliente, InterfaceListenerAPI interfaceListenerAPI) throws Exception {
+        AlertaUsuarioClienteManager alertaUsuarioClienteManager = new AlertaUsuarioClienteManager();
+        alertaUsuarioClienteManager.editarAlertaUsuarioCliente(alertaUsuarioCliente, interfaceListenerAPI);
+    }
+
     public static ErroValidacaoModel validarCampos(AlertaUsuarioCliente alertaUsuarioCliente) {
 
         if (alertaUsuarioCliente.getDesastreAvistado().contains("*"))

@@ -39,8 +39,7 @@ import softalertv3.softalertv3.softalert.Model.Endereco;
 import softalertv3.softalertv3.softalert.Uteis.CodigoPermissao;
 import softalertv3.softalertv3.softalert.Uteis.Geral;
 
-public class ActLocalizacaoAlerta extends AppCompatActivity
-        implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+public class ActLocalizacaoAlerta extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
@@ -53,6 +52,10 @@ public class ActLocalizacaoAlerta extends AppCompatActivity
     public static Endereco enderecoSelecionado;
     public static Boolean selecionou = false;
 
+    private Boolean visualizacaoAlertaApenas;
+
+    FloatingActionMenu floatingActionMenuFinalizar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +67,18 @@ public class ActLocalizacaoAlerta extends AppCompatActivity
 
         enderecoSelecionado = (Endereco) this.getIntent().getSerializableExtra("enderecoSelecionado");
 
-        if(enderecoSelecionado == null) {
+        if (enderecoSelecionado == null) {
             markerSelecionado = null;
             selecionou = false;
-        }
-        else
+        } else
             selecionou = true;
+
+        String visualizacaoAlertaApenasAux = getIntent().getStringExtra("visualizacaoAlertaApenas");
+        if (visualizacaoAlertaApenasAux != null)
+            visualizacaoAlertaApenas = Boolean.parseBoolean(visualizacaoAlertaApenasAux);
+
+        if (visualizacaoAlertaApenas)
+            floatingActionMenuFinalizar.setVisibility(View.INVISIBLE);
     }
 
     //region METODOS
@@ -114,7 +123,7 @@ public class ActLocalizacaoAlerta extends AppCompatActivity
 
         mapFragment.getMapAsync(this);
 
-        FloatingActionMenu floatingActionMenuFinalizar = (FloatingActionMenu) findViewById(R.id.FloatingActionMenuFinalizar_content_act_localizacao_alerta);
+        floatingActionMenuFinalizar = (FloatingActionMenu) findViewById(R.id.FloatingActionMenuFinalizar_content_act_localizacao_alerta);
 
         floatingActionMenuFinalizar.setOnMenuButtonClickListener(new View.OnClickListener() {
             @Override
@@ -207,6 +216,8 @@ public class ActLocalizacaoAlerta extends AppCompatActivity
         return true;
     }
 
+    //endregion
+
     //region EVENTOS
 
     @Override
@@ -262,6 +273,8 @@ public class ActLocalizacaoAlerta extends AppCompatActivity
 
     @Override
     public void onMapClick(LatLng latLng) {
+        if(visualizacaoAlertaApenas)
+            return;
 
         Marker novoMarker = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latLng.latitude, latLng.longitude))
