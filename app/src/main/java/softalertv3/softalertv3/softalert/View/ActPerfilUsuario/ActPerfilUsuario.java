@@ -1,57 +1,56 @@
 package softalertv3.softalertv3.softalert.View.ActPerfilUsuario;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import softalertv3.softalertv3.R;
-import softalertv3.softalertv3.softalert.View.ActLocalizacoesUsuario.ActLocalizacoesUsuario;
 
-public class ActPerfilUsuario extends AppCompatActivity {
+public class ActPerfilUsuario extends BaseAdapter {
 
-    ListView listView;
+    String[] titulos = {"Minhas Informações", "Meu Número", "Minhas Localizações"};
+
+    int[] imagens = {R.drawable.ic_account_circle_grey600_24dp,R.drawable.ic_cellphone_wireless_grey600_24dp,R.drawable.ic_google_maps_grey600_24dp};
+
+    AppCompatActivity activity;
+
+    public ActPerfilUsuario(AppCompatActivity activity)
+    {
+        this.activity = activity;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_perfil_usuario);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        configuraComponentes();
+    public int getCount() {
+        return titulos.length;
     }
 
-    //region METODOS
-
-    public void configuraComponentes() {
-        listView = (ListView) findViewById(R.id.content_act_perfil_usuario_listView);
-        ActPerfilUsuarioAdapter actPerfilUsuarioAdapter = new ActPerfilUsuarioAdapter(this);
-
-        listView.setAdapter(actPerfilUsuarioAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {chamaActivityActLocalizacoesUsuario(position);}
-        });
+    @Override
+    public Object getItem(int position) {
+        return null;
     }
 
-
-    //endregion
-
-    //region EVENTOS
-
-    public void chamaActivityActLocalizacoesUsuario(int position){
-
-        if(position != 2)
-            return;
-
-        Intent intent = new Intent(ActPerfilUsuario.this, ActLocalizacoesUsuario.class);
-        startActivity(intent);
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
 
-    //endregion
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        convertView = this.activity.getLayoutInflater().inflate(R.layout.content_act_perfil_usuario_layout_list_view, null);
+
+        ImageView imagemDescricao = (ImageView) convertView.findViewById(R.id.ImgItemLista_content_act_perfil_usuario_layout_list_view);
+        TextView txtDescricaoItemLista = (TextView) convertView.findViewById(R.id.txtDescricaoItemLista_content_act_perfil_usuario_layout_list_view);
+
+        imagemDescricao.setImageResource(imagens[position]);
+        txtDescricaoItemLista.setText(titulos[position]);
+
+        return convertView;
+    }
 }

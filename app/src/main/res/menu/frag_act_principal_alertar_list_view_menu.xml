@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/frag_act_principa_alertar_listView_menu_title_ver_detalhes"
+        android:title="Ver Detalhes"
+        app:showAsAction="never"
+        android:orderInCategory="1"/>
+
+    <item
+        android:id="@+id/frag_act_principa_alertar_listView_menu_title_cancelar"
+        android:title="Cancelar"
+        app:showAsAction="never"
+        android:orderInCategory="2"/>
+
+</menu>

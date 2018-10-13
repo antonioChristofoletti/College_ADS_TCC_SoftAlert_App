@@ -82,6 +82,11 @@ public abstract class Geral {
         }
     }
 
+    public static String formataData(String formato, Date date)
+    {
+        return android.text.format.DateFormat.format(formato, date).toString();
+    }
+
     public static String removerMascara(String texto) {
         texto = texto.replace(".", "");
         texto = texto.replace(",", "");

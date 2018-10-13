@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="softalertv3.softalertv3">
 
+    <uses-feature android:name="org.apache.http.legacy" android:required="false"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,24 +36,24 @@
         <activity
             android:name=".softalert.View.ActPrincipal.ActPrincipal"
             android:label="@string/SoftAlert"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".softalert.View.ActPerfilUsuario.ActPerfilUsuario"
+            android:name=".softalert.View.ActPerfilUsuario.ActPerfilUsuarioAdapter"
             android:label="@string/title_activity_act_perfil_usuario"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".softalert.View.ActLocalizacoesUsuario.ActLocalizacoesUsuario"
             android:label="@string/title_activity_ActLocalizacoesUsuario"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".softalert.View.ActAlertaCadastro"
+            android:name=".softalert.View.ActAlertaUsuario.ActAlertaCadastro"
             android:label="@string/title_activity_act_alerta_cadastro"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

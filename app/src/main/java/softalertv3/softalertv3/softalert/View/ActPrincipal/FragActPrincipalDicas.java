@@ -1,6 +1,5 @@
 package softalertv3.softalertv3.softalert.View.ActPrincipal;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

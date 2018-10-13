@@ -11,6 +11,8 @@ public abstract class UsuarioController {
 
     protected static ErroValidacaoModel validaCamposUsuario(Usuario u) {
 
+
+
         int i=0;
         for (Telefone e : u.getListaTelefones()) {
             if (e.getTelefone().length() < 12) {

@@ -18,4 +18,5 @@
     <string name="title_activity_act_perfil_usuario">Meu Perfil</string>
     <string name="title_activity_act_localizacoes_usuario">Meus Locais</string>
     <string name="title_activity_act_alerta_cadastro">Cadastrar Alerta</string>
+    <string name="title_activity_act_localizacao_cadastro_alerta">Local Alerta</string>
 </resources>

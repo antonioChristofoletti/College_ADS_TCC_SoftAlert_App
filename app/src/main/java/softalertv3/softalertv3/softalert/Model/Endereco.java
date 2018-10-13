@@ -3,7 +3,9 @@ package softalertv3.softalertv3.softalert.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Endereco {
+import java.io.Serializable;
+
+public class Endereco implements Serializable {
 
     @JsonIgnore
     private int id;

@@ -1,13 +1,9 @@
 package softalertv3.softalertv3.softalert.View.ActPrincipal;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +13,7 @@ import android.view.MenuItem;
 
 import softalertv3.softalertv3.R;
 import softalertv3.softalertv3.softalert.DAOInterno.DadosOpenHelper;
-import softalertv3.softalertv3.softalert.View.ActPerfilUsuario.ActPerfilUsuario;
+import softalertv3.softalertv3.softalert.View.ActPerfilUsuario.ActPerfilUsuarioAdapter;
 
 public class ActPrincipal extends AppCompatActivity {
 
@@ -71,7 +67,7 @@ public class ActPrincipal extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.act_principal_menu_item_perfil: {
-                Intent intent = new Intent(this, ActPerfilUsuario.class);
+                Intent intent = new Intent(this, ActPerfilUsuarioAdapter.class);
                 startActivity(intent);
                 break;
             }

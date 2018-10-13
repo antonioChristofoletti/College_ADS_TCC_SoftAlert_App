@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".softalert.View.ActAlertaUsuario.ActLocalizacaoAlerta">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="20dp"
+        android:elevation="10dp"
+        android:layout_marginTop="67dp"
+        android:background="@drawable/background_edittext_googlemaps_pesquisa"
+        android:imeOptions="actionSearch"
+        android:id="@+id/teste">
+
+        <ImageView
+            android:id="@+id/ImagePesquisa_content_act_localizacoes_usuario"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/baseline_search_black_24" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/ImagePesquisa_content_act_localizacoes_usuario"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:id="@+id/txtPesquisaMapa_content_act_localizacoes_usuario"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:hint="Pesquisa a cidade, bairro ou rua..."
+            />
+
+        ></RelativeLayout>
+
+    <include layout="@layout/content_act_localizacao_alerta" />
+
+</android.support.design.widget.CoordinatorLayout>
