@@ -59,6 +59,8 @@ public class ActCadastro_telefone_basico extends AppCompatActivity implements In
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        this.setTitle("Autentique-se");
+
         DadosOpenHelper.criarconexao(this);
 
         UsuarioCliente uc = UsuarioClienteDAO.buscarCliente();

@@ -1,5 +1,5 @@
 <resources>
-
+    <string name="app_name">Soft Alert</string>
     <string name="title_activity_testemap">Map</string>
     <string name="title_activity_teste_map2">testeMap2</string>
     <string name="title_activity_teste_maps">Map</string>

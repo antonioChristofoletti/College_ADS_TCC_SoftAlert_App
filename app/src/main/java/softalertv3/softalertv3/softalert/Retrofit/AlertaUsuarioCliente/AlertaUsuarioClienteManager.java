@@ -44,7 +44,7 @@ public class AlertaUsuarioClienteManager implements InterfaceListenerAPI {
 
     public void inserirAlertaUsuarioClienteInterno(String token) {
 
-        Call<AlertaUsuarioCliente> call = new RetrofitConfig().getAlertaUsuarioCliente().inserirAlertaUsuarioCliente(this.alertaUsuarioCliente, "Bearer " + token);
+        Call<AlertaUsuarioCliente> call = new RetrofitConfig().getAlertaUsuarioClienteService().inserirAlertaUsuarioCliente(this.alertaUsuarioCliente, "Bearer " + token);
 
 
         String aux = JSONManager.convertJSON(alertaUsuarioCliente);
@@ -111,7 +111,7 @@ public class AlertaUsuarioClienteManager implements InterfaceListenerAPI {
     }
 
     public void retornaAlertasInternos(String token) {
-        Call<ArrayList<AlertaUsuarioCliente>> call = new RetrofitConfig().getAlertaUsuarioCliente().retornaEnderecos(usuarioCliente.getId(), "Bearer " + token);
+        Call<ArrayList<AlertaUsuarioCliente>> call = new RetrofitConfig().getAlertaUsuarioClienteService().retornaEnderecos(usuarioCliente.getId(), "Bearer " + token);
 
         call.enqueue(new Callback<ArrayList<AlertaUsuarioCliente>>() {
             @Override
@@ -184,7 +184,7 @@ public class AlertaUsuarioClienteManager implements InterfaceListenerAPI {
 
     public void editarAlertaUsuarioClienteInterno(String token) {
 
-        Call<AlertaUsuarioCliente> call = new RetrofitConfig().getAlertaUsuarioCliente().editarEnderecoUsuarioAdministrador(this.alertaUsuarioCliente, "Bearer " + token);
+        Call<AlertaUsuarioCliente> call = new RetrofitConfig().getAlertaUsuarioClienteService().editarEnderecoUsuarioAdministrador(this.alertaUsuarioCliente, "Bearer " + token);
 
 
         String aux = JSONManager.convertJSON(alertaUsuarioCliente);

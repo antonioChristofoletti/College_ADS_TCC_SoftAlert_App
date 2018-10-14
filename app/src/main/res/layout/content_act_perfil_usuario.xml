@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".softalert.View.ActPerfilUsuario.ActPerfilUsuarioAdapter"
+    tools:context=".softalert.View.ActPerfilUsuario.ActPerfilUsuario"
     tools:layout_editor_absoluteY="25dp"
     tools:showIn="@layout/act_perfil_usuario">
 
