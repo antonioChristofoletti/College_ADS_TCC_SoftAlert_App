@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -82,6 +83,7 @@ public class FragActPrincipalAlertar extends Fragment implements InterfaceListen
 
     @Override
     public void retornaMensagemErro(String mensagem) {
+        Toast.makeText(this.view.getContext(), "Erro ao atualizar os alertas enviados pelo usuário. " + mensagem, Toast.LENGTH_LONG).show();
     }
 
     //endregion

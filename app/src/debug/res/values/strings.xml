@@ -6,4 +6,5 @@
     <string name="title_activity_teste_map_again">testeMapAgain</string>
     <string name="title_activity_ActLocalizacoesUsuario">Meus Locais</string>
     <string name="title_activity_act_localizacao_alerta">Local Alerta</string>
+    <string name="title_activity_act_detalhes_informacoes_noticias">Detalhes Notícia</string>
 </resources>

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import softalertv3.softalertv3.R;
 import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAPI;
+import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAlertaManagerNotification;
 import softalertv3.softalertv3.softalert.Model.Alerta;
 import softalertv3.softalertv3.softalert.Model.UsuarioCliente;
 import softalertv3.softalertv3.softalert.View.ActCadastro_telefone_basico;
@@ -23,12 +24,14 @@ import softalertv3.softalertv3.softalert.View.ActCadastro_telefone_basico;
 public class AlertaManagerNotification implements InterfaceListenerAPI{
 
     Context context;
-    private static int uniqueID = 201019997;
+    InterfaceListenerAlertaManagerNotification interfaceListenerAlertaManagerNotification;
+    private static int IDNotificacao = 201019997;
 
     public static ArrayList<Alerta> listaAlerta;
 
-    public AlertaManagerNotification(Context context) {
+    public AlertaManagerNotification(Context context,InterfaceListenerAlertaManagerNotification interfaceListenerAlertaManagerNotification) {
         this.context = context;
+        this.interfaceListenerAlertaManagerNotification = interfaceListenerAlertaManagerNotification;
     }
 
     public void iniciarGerenciamentoNotificacoes() {
@@ -39,33 +42,44 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
         while (true) {
             try {
                 AlertaController.retornaAlertas(uc, this);
-                Thread.sleep(10000);
+                Thread.sleep(30000);
             } catch (InterruptedException e) {
             }
         }
     }
 
+    //region EVENTOS API
     @Override
     public void retornaMensagemSucesso(String mensagem) {
 
         ArrayList<Alerta> novaListaAlerta = AlertaController.retornaAlertaArrayList();
 
+        interfaceListenerAlertaManagerNotification.atualizarListagemAlerta(novaListaAlerta);
+
         //Adiciona os novos alertas
         for (Alerta alertaNovo: novaListaAlerta) {
 
+            boolean encontrou = false;
             for (Alerta alertaVelho : listaAlerta){
 
                 if(alertaNovo.getId() == alertaVelho.getId()){
-                    continue;
+                    encontrou = true;
+                    break;
                 }
             }
 
-            listaAlerta.add(alertaNovo);
+            if(!encontrou)
+                listaAlerta.add(alertaNovo);
         }
 
         for (Alerta alerta : listaAlerta){
 
-            if((alerta.getNivelAlerta().getId() == 1 || alerta.getNivelAlerta().getId() == 4) && !alerta.isSubiuNotificacao()){
+            if((alerta.getNivelAlerta().getId() == 1 || alerta.getNivelAlerta().getId() == 2) && !alerta.isSubiuNotificacao()){
+                enviarMensagem(alerta);
+                alerta.setSubiuNotificacao(true);
+            }
+
+            if(alerta.getNivelAlerta().getId() == 3 || alerta.getNivelAlerta().getId() == 4){
                 enviarMensagem(alerta);
                 alerta.setSubiuNotificacao(true);
             }
@@ -78,32 +92,65 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
         Log.e("ALERT M. NOTIFICATION", mensagem);
     }
 
+    //endregion
+
     public void enviarMensagem(Alerta alerta) {
+
+        if(alerta.getIdNivelAlerta() == 0){
+            alerta.setIdNivelAlerta(this.IDNotificacao++);
+        }
 
         NotificationCompat.Builder notification;
 
         notification = new NotificationCompat.Builder(context);
-        notification.setAutoCancel(false);
+
+
+        if(alerta.getNivelAlerta().getId() == 1 || alerta.getNivelAlerta().getId() == 2)
+        {
+            notification.setPriority(NotificationCompat.PRIORITY_HIGH);
+            notification.setAutoCancel(true);
+
+            notification.setVibrate(new long[]{Notification.DEFAULT_VIBRATE});
+        }else{
+            notification.setPriority(NotificationCompat.PRIORITY_MAX);
+            notification.setAutoCancel(false);
+
+            Uri uri;
+            if(alerta.getNivelAlerta().getId() == 3)
+                uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.amber_alert_11seconds);
+            else
+                uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.amber_alert_22seconds);
+
+            notification.setVibrate(new long[]{0,400,800,600,800,800,800,1000});
+            notification.setSound(uri);
+        }
 
         notification.setSmallIcon(R.drawable.baseline_error_white_24);
 
         int idAlertCircleBitMap = R.drawable.alert_circle_green_96dp;
 
+        notification.setColor(Color.GREEN);
+        notification.setLights(Color.GREEN, 3000, 3000);
+
         if(alerta.getNivelAlerta().getId() == 2) {
             idAlertCircleBitMap = R.drawable.alert_circle_yellow_96dp;
-            notification.setColor(Color.YELLOW);
+            notification.setColor(Color.parseColor("#FFFDE7"));
+            notification.setLights(Color.YELLOW, 3000, 3000);
         }
+
         if(alerta.getNivelAlerta().getId() == 3) {
             idAlertCircleBitMap = R.drawable.alert_circle_orange_96dp;
-            notification.setColor(Color.rgb(255,0,0));
+            notification.setColor(Color.parseColor("#FFB74D"));
+            notification.setLights(Color.rgb(255,0,0), 3000, 3000);
         }
+
         if(alerta.getNivelAlerta().getId() == 4) {
             idAlertCircleBitMap = R.drawable.alert_circle_red_96dp;
             notification.setColor(Color.RED);
+            notification.setLights(Color.RED, 3000, 3000);
         }
 
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), idAlertCircleBitMap);
-
 
         notification.setColorized(true);
 
@@ -112,24 +159,16 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
         notification.setWhen(System.currentTimeMillis());
         notification.setVisibility(Notification.VISIBILITY_PUBLIC);
 
-        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.alert_sound);
-        notification.setVibrate(new long[]{0,400,800,600,800,800,800,1000});
-        notification.setSound(uri);
-
         notification.setContentTitle(alerta.getEvento().toUpperCase());
 
         notification.setContentText(alerta.getDescricao());
         notification.setSubText(alerta.getNivelAlerta().getDescricao().toUpperCase());
-
-        notification.setLights(Color.RED, 3000, 3000);
-
-        notification.setPriority(NotificationCompat.PRIORITY_MAX);
 
         Intent intent = new Intent(context, ActCadastro_telefone_basico.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(uniqueID, notification.build());
+        nm.notify(IDNotificacao, notification.build());
     }
 }

@@ -1,6 +1,7 @@
 package softalertv3.softalertv3.softalert.View.ActPrincipal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,15 +9,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+
+import softalertv3.softalertv3.ActDetalhesInformacoesNoticias;
 import softalertv3.softalertv3.R;
 import softalertv3.softalertv3.softalert.Controller.AlertaManagerNotification;
+import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAlertaManagerNotification;
+import softalertv3.softalertv3.softalert.Model.Alerta;
 
-public class FragActPrincipalNoticias extends Fragment {
+public class FragActPrincipalNoticias extends Fragment implements InterfaceListenerAlertaManagerNotification{
 
-    private Context context;
     private View view;
+    private ListView listViewNoticias;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,8 +34,6 @@ public class FragActPrincipalNoticias extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        this.context = context;
     }
 
     @Override
@@ -37,18 +42,42 @@ public class FragActPrincipalNoticias extends Fragment {
 
         this.view = getView();
 
-        Button button = view.findViewById(R.id.sendMessage);
+        listViewNoticias = (ListView) view.findViewById(R.id.frag_act_principa_noticiar_listView);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        listViewNoticias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    public void run() {
-                        AlertaManagerNotification alertaManagerNotification = new AlertaManagerNotification(context);
-                        alertaManagerNotification.iniciarGerenciamentoNotificacoes();
-                    }
-                }).start();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), ActDetalhesInformacoesNoticias.class);
+                startActivity(intent);
             }
         });
+
+        iniciarServicoNotificacoes(view.getContext());
     }
+
+
+    public void iniciarServicoNotificacoes(final Context context) {
+        new Thread(new Runnable() {
+            public void run() {
+                AlertaManagerNotification alertaManagerNotification = new AlertaManagerNotification(context, FragActPrincipalNoticias.this);
+                alertaManagerNotification.iniciarGerenciamentoNotificacoes();
+            }
+        }).start();
+    }
+
+    //region
+
+
+    @Override
+    public void atualizarListagemAlerta(ArrayList<Alerta> listaAlerta) {
+
+        if (listaAlerta == null)
+            return;
+
+        FragActPrincipalNoticiasAdapter adapter = new FragActPrincipalNoticiasAdapter(((ActPrincipal) getActivity()), this, listaAlerta);
+
+        listViewNoticias.setAdapter(adapter);
+    }
+
+    //endregion
 }

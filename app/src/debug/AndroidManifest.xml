@@ -13,11 +13,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".softalert.View.ActAlertaUsuario.ActLocalizacaoAlerta"
-            android:label="@string/title_activity_act_localizacao_alerta"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
