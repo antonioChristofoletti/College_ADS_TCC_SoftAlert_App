@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -28,16 +29,22 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import softalertv3.softalertv3.R;
+import softalertv3.softalertv3.softalert.Model.Alerta;
+import softalertv3.softalertv3.softalert.Model.AlertaRegiaoAfetada;
 import softalertv3.softalertv3.softalert.Uteis.CodigoPermissao;
 import softalertv3.softalertv3.softalert.Uteis.Geral;
 
 public class ActDetalhesInformacoesNoticiasLocalizacoes extends AppCompatActivity
         implements OnMapReadyCallback {
+
+    private Alerta alerta;
 
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
@@ -55,9 +62,10 @@ public class ActDetalhesInformacoesNoticiasLocalizacoes extends AppCompatActivit
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        this.alerta = (Alerta) this.getIntent().getSerializableExtra("alerta");
+
         configurarComponentes();
     }
-
 
     //region METODOS
 
@@ -84,9 +92,7 @@ public class ActDetalhesInformacoesNoticiasLocalizacoes extends AppCompatActivit
 
                             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, 16);
                             mMap.moveCamera(update);
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(ActDetalhesInformacoesNoticiasLocalizacoes.this, "Nenhum endereço encontrado", Toast.LENGTH_SHORT).show();
                         }
 
@@ -146,6 +152,32 @@ public class ActDetalhesInformacoesNoticiasLocalizacoes extends AppCompatActivit
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
     }
 
+    public void carregarRegioesAfetadas(Alerta alerta, GoogleMap mMap) {
+
+        boolean primeiro = true;
+        for (AlertaRegiaoAfetada arf : alerta.getListaAlertaRegiaoAfetada()) {
+
+            LatLng latLng = new LatLng(arf.getLatitude(), arf.getLongitude());
+
+            mMap.addCircle(new CircleOptions()
+                    .center(latLng)
+                    .radius(arf.getAbrangencia())
+                    .strokeWidth(3)
+                    .strokeColor(Color.parseColor(arf.getCorBordaCirculo()))
+                    .fillColor(ColorUtils.setAlphaComponent(Color.parseColor(arf.getCorCirculo()), 70)));
+
+            mMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(arf.getTitulo()))
+                    .setSnippet(arf.getSubTitulo());
+
+            if (primeiro) {
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, 16);
+                mMap.moveCamera(update);
+                primeiro = false;
+            }
+        }
+    }
 
     //endregion
 
@@ -184,16 +216,7 @@ public class ActDetalhesInformacoesNoticiasLocalizacoes extends AppCompatActivit
             descobreLocalizacaoAtual();
         }
 
-        //
-
-        CircleOptions c = new CircleOptions();
-        c.center(new LatLng(-23.001005168686913,-47.52259746193885 ));
-        c.radius(20000.0);
-        c.strokeWidth(10f);
-        c.strokeColor(Color.RED);
-        c.fillColor(Color.argb(70, 55,50,89));
-
-        mMap.addCircle(c);
+        carregarRegioesAfetadas(this.alerta, this.mMap);
     }
 
     @Override

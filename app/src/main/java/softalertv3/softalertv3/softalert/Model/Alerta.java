@@ -25,7 +25,7 @@ public class Alerta implements Serializable {
     private ArrayList<LocalizacaoAlerta> listaLocalizacoesAlerta;
     private ArrayList<UsuarioCliente> listaUsuarioCliente;
     private ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios;
-
+    private ArrayList<AlertaRegiaoAfetada> listaAlertaRegiaoAfetada;
 
 
     @JsonIgnore
@@ -37,7 +37,8 @@ public class Alerta implements Serializable {
     public Alerta() {
     }
 
-    public Alerta(int id, String evento, Date dataInsercao, String descricao, String status, NivelAlerta nivelAlerta, int idNivelAlerta, UsuarioAdministrador administrador, int idUsuarioAdministrador, ArrayList<LocalizacaoAlerta> listaLocalizacoesAlerta, ArrayList<UsuarioCliente> listaUsuarioCliente, ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios, int idNotification, boolean subiuNotificacao) {
+
+    public Alerta(int id, String evento, Date dataInsercao, String descricao, String status, NivelAlerta nivelAlerta, int idNivelAlerta, UsuarioAdministrador administrador, int idUsuarioAdministrador, ArrayList<LocalizacaoAlerta> listaLocalizacoesAlerta, ArrayList<UsuarioCliente> listaUsuarioCliente, ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios, ArrayList<AlertaRegiaoAfetada> listaAlertaRegiaoAfetada, int idNotification, boolean subiuNotificacao) {
         this.id = id;
         this.evento = evento;
         this.dataInsercao = dataInsercao;
@@ -50,6 +51,7 @@ public class Alerta implements Serializable {
         this.listaLocalizacoesAlerta = listaLocalizacoesAlerta;
         this.listaUsuarioCliente = listaUsuarioCliente;
         this.listaAlertaPossuiUsuarios = listaAlertaPossuiUsuarios;
+        this.listaAlertaRegiaoAfetada = listaAlertaRegiaoAfetada;
         this.idNotification = idNotification;
         this.subiuNotificacao = subiuNotificacao;
     }
@@ -164,5 +166,13 @@ public class Alerta implements Serializable {
 
     public void setListaAlertaPossuiUsuarios(ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios) {
         this.listaAlertaPossuiUsuarios = listaAlertaPossuiUsuarios;
+    }
+
+    public ArrayList<AlertaRegiaoAfetada> getListaAlertaRegiaoAfetada() {
+        return listaAlertaRegiaoAfetada;
+    }
+
+    public void setListaAlertaRegiaoAfetada(ArrayList<AlertaRegiaoAfetada> listaAlertaRegiaoAfetada) {
+        this.listaAlertaRegiaoAfetada = listaAlertaRegiaoAfetada;
     }
 }

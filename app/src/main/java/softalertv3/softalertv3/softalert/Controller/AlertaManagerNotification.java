@@ -21,6 +21,7 @@ import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAlertaManage
 import softalertv3.softalertv3.softalert.Model.Alerta;
 import softalertv3.softalertv3.softalert.Model.UsuarioCliente;
 import softalertv3.softalertv3.softalert.View.ActCadastro_telefone_basico;
+import softalertv3.softalertv3.softalert.View.ActPrincipal.FragNoticias.ActDetalhesInformacoesNoticias;
 
 public class AlertaManagerNotification implements InterfaceListenerAPI{
 
@@ -179,7 +180,8 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
         notification.setContentText(alerta.getDescricao());
         notification.setSubText(alerta.getNivelAlerta().getDescricao().toUpperCase());
 
-        Intent intent = new Intent(context, ActCadastro_telefone_basico.class);
+        Intent intent = new Intent(context, ActDetalhesInformacoesNoticias.class);
+        intent.putExtra("alerta", alerta);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
 

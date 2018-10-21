@@ -46,7 +46,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/txtAprovadoLista_content_act_perfil_usuario_layout_list_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtEvento_DataItemLista_content_act_perfil_usuario_layout_list_view"
-        app:srcCompat="@drawable/baseline_more_vert_black_24" />
+        app:srcCompat="@drawable/baseline_more_vert_white_24"
+        android:tint="@color/defaultColorTextView"/>
 
 
 </android.support.constraint.ConstraintLayout>

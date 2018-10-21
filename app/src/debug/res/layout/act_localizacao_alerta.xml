@@ -23,8 +23,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
         android:elevation="10dp"
         android:layout_marginTop="67dp"
         android:background="@drawable/background_edittext_googlemaps_pesquisa"
@@ -36,7 +36,8 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:src="@drawable/baseline_search_black_24" />
 
         <EditText

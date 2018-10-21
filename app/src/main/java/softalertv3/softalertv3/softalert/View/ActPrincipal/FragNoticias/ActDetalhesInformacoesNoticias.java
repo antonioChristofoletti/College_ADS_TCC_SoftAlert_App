@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -116,7 +117,14 @@ public class ActDetalhesInformacoesNoticias extends AppCompatActivity {
     //endregion
 
     public void btnLocaisEventoOnClick(View view) {
+        if(alerta.getListaAlertaRegiaoAfetada().size() == 0)
+        {
+            Toast.makeText(this, "Essa notícia não possui áreas afetadas", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = new Intent(this, ActDetalhesInformacoesNoticiasLocalizacoes.class);
+        intent.putExtra("alerta", alerta);
         startActivity(intent);
     }
 }

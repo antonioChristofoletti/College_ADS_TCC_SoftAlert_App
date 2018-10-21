@@ -23,8 +23,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
         android:elevation="10dp"
         android:layout_marginTop="67dp"
         android:background="@drawable/background_edittext_googlemaps_pesquisa"
@@ -36,23 +36,24 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:src="@drawable/baseline_search_black_24" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/ImagePesquisa_content_act_localizacoes_usuario"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:textColor="#000"
             android:id="@+id/txtPesquisaMapa_content_act_localizacoes_usuario"
+            android:layout_width="273dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="-4dp"
+            android:layout_toRightOf="@+id/ImagePesquisa_content_act_localizacoes_usuario"
             android:background="@null"
+            android:hint="Pesquisa a cidade, bairro ou rua..."
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            android:hint="Pesquisa a cidade, bairro ou rua..."
-            />
+            android:textColor="#000"
+            android:textSize="15sp" />
 
         ></RelativeLayout>
 

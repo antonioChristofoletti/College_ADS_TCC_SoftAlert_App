@@ -61,6 +61,10 @@ public class ActCadastroSituacaoNoticiaUsuario extends AppCompatActivity impleme
         this.alerta = (Alerta) this.getIntent().getSerializableExtra("alerta");
 
         configurarComponentes();
+
+        if(this.alerta.getNivelAlerta().getId() == 1){
+            finalizarAutomatico();
+        }
     }
 
     public void configurarComponentes() {
@@ -114,6 +118,42 @@ public class ActCadastroSituacaoNoticiaUsuario extends AppCompatActivity impleme
             progressDialog.setMessage("Finalizando a atualização. Por favor aguarde...");
             progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
             progressDialog.show();
+
+            AlertaController.atualizarVinculoAlertaPossuiUsuario(alertaPossuiUsuario, this);
+
+        } catch (Exception ex) {
+            Geral.chamarAlertDialog(this, "Erro", ex.getMessage());
+        }
+    }
+
+    public void finalizarAutomatico() {
+        try {
+            AlertaPossuiUsuario alertaPossuiUsuario = new AlertaPossuiUsuario();
+
+            alertaPossuiUsuario.setIdAlerta(alerta.getId());
+
+            alertaPossuiUsuario.setDataVisualizou(new Date());
+
+            UsuarioCliente usuarioCliente = UsuarioClienteController.retornaUsuarioClienteDAOInterno();
+
+            alertaPossuiUsuario.setIdUsuario(usuarioCliente.getId());
+
+            alertaPossuiUsuario.setSituacaoUsuario("Estou seguro");
+
+            ErroValidacaoModel erroValidacaoModel = AlertaPossuiClienteController.validarCampos(alertaPossuiUsuario);
+
+            if (erroValidacaoModel != null) {
+                processaErroValidacao(erroValidacaoModel);
+                return;
+            }
+
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Finalizando a atualização. Por favor aguarde...");
+            progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+            progressDialog.show();
+
+            Thread.sleep(3000);
 
             AlertaController.atualizarVinculoAlertaPossuiUsuario(alertaPossuiUsuario, this);
 
