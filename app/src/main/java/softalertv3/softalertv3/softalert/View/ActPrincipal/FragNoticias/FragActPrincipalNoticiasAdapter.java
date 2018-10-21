@@ -1,29 +1,19 @@
-package softalertv3.softalertv3.softalert.View.ActPrincipal;
+package softalertv3.softalertv3.softalert.View.ActPrincipal.FragNoticias;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import softalertv3.softalertv3.R;
-import softalertv3.softalertv3.softalert.Controller.AlertaUsuarioClienteController;
-import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAPI;
 import softalertv3.softalertv3.softalert.Model.Alerta;
-import softalertv3.softalertv3.softalert.Model.AlertaUsuarioCliente;
 import softalertv3.softalertv3.softalert.Uteis.Geral;
-import softalertv3.softalertv3.softalert.View.ActAlertaUsuario.ActAlertaCadastro;
 
 public class FragActPrincipalNoticiasAdapter extends BaseAdapter{
 
@@ -63,23 +53,39 @@ public class FragActPrincipalNoticiasAdapter extends BaseAdapter{
 
         TextView txtEvento = (TextView) convertView.findViewById(R.id.txtEvento_frag_act_principal_noticias_list_view);
 
-        TextView txtData_mais_status = (TextView) convertView.findViewById(R.id.txtData_mais_Status_frag_act_principal_noticias_list_view);
+        TextView txtData = (TextView) convertView.findViewById(R.id.txtData_frag_act_principal_noticias_list_view);
+
+        TextView txtStatus = (TextView) convertView.findViewById(R.id.txtStatus_frag_act_principal_noticias_list_view);
 
         TextView txtDescricao = (TextView) convertView.findViewById(R.id.txtDescricao_frag_act_principal_noticias_list_view);
 
-        ImageView imageViewOpcoes = (ImageView) convertView.findViewById(R.id.ImageViewOpcoes_frag_act_principal_alertar_list_view);
-
         ImageView imageViewAlerta = (ImageView) convertView.findViewById(R.id.ImageViewAlerta_frag_act_principal_alertar_list_view);
+
+        ImageView imageViewUsuarioVisualizou = (ImageView) convertView.findViewById(R.id.ImageViewUsuarioVisualizou_frag_act_principal_alertar_list_view);
+
+        if(a.getListaAlertaPossuiUsuarios().get(0).getDataVisualizou() != null)
+            imageViewUsuarioVisualizou.setImageResource(R.drawable.baseline_visibility_white_24);
 
         txtEvento.setText(a.getEvento());
 
-        String status = "Ativo";
-        if(a.getStatus().equals("C")) {
-            status = "Cancelado";
-            txtData_mais_status.setTextColor(Color.RED);
+        String status = "ATIVO";
+        txtStatus.setTextColor(ContextCompat.getColor(activity, R.color.eventoValidado));
+
+        if(a.getStatus().equals("Cancelado")) {
+            status = "CANCELADO";
+            txtStatus.setTextColor(ContextCompat.getColor(activity, R.color.eventoCancelado_NaoAprovado));
         }
 
-        txtData_mais_status.setText(Geral.formataData("dd/MM/yyyy HH:mm", a.getDataInsercao()) + " - " + status);
+        if(a.getStatus().equals("Desativado")) {
+            status = "DESATIVADO";
+            txtStatus.setTextColor(ContextCompat.getColor(activity, R.color.eventoAguardando));
+        }
+
+        txtStatus.setText(status);
+
+        txtData.setText("Data: " + Geral.formataData("dd/MM/yyyy HH:mm", a.getDataInsercao()));
+
+
 
         txtDescricao.setText(a.getDescricao());
 

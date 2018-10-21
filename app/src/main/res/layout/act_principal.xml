@@ -34,12 +34,6 @@
             android:text="NOTÍCIAS" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/tabLayoutActPrincipalItemDicas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DICAS" />
-
-        <android.support.design.widget.TabItem
             android:id="@+id/tabLayoutActPrincipalItemPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,10 +3,11 @@ package softalertv3.softalertv3.softalert.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Alerta {
+public class Alerta implements Serializable {
     private int id;
     private String evento;
 
@@ -23,6 +24,9 @@ public class Alerta {
 
     private ArrayList<LocalizacaoAlerta> listaLocalizacoesAlerta;
     private ArrayList<UsuarioCliente> listaUsuarioCliente;
+    private ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios;
+
+
 
     @JsonIgnore
     private int idNotification;
@@ -33,9 +37,7 @@ public class Alerta {
     public Alerta() {
     }
 
-    public Alerta(int id, String evento, Date dataInsercao, String descricao, String status, NivelAlerta nivelAlerta, int idNivelAlerta,
-                  UsuarioAdministrador administrador, int idUsuarioAdministrador, ArrayList<LocalizacaoAlerta> listaLocalizacoesAlerta,
-                  ArrayList<UsuarioCliente> listaUsuarioCliente, int idNotification, boolean subiuNotificacao) {
+    public Alerta(int id, String evento, Date dataInsercao, String descricao, String status, NivelAlerta nivelAlerta, int idNivelAlerta, UsuarioAdministrador administrador, int idUsuarioAdministrador, ArrayList<LocalizacaoAlerta> listaLocalizacoesAlerta, ArrayList<UsuarioCliente> listaUsuarioCliente, ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios, int idNotification, boolean subiuNotificacao) {
         this.id = id;
         this.evento = evento;
         this.dataInsercao = dataInsercao;
@@ -47,6 +49,7 @@ public class Alerta {
         this.idUsuarioAdministrador = idUsuarioAdministrador;
         this.listaLocalizacoesAlerta = listaLocalizacoesAlerta;
         this.listaUsuarioCliente = listaUsuarioCliente;
+        this.listaAlertaPossuiUsuarios = listaAlertaPossuiUsuarios;
         this.idNotification = idNotification;
         this.subiuNotificacao = subiuNotificacao;
     }
@@ -153,5 +156,13 @@ public class Alerta {
 
     public void setSubiuNotificacao(boolean subiuNotificacao) {
         this.subiuNotificacao = subiuNotificacao;
+    }
+
+    public ArrayList<AlertaPossuiUsuario> getListaAlertaPossuiUsuarios() {
+        return listaAlertaPossuiUsuarios;
+    }
+
+    public void setListaAlertaPossuiUsuarios(ArrayList<AlertaPossuiUsuario> listaAlertaPossuiUsuarios) {
+        this.listaAlertaPossuiUsuarios = listaAlertaPossuiUsuarios;
     }
 }

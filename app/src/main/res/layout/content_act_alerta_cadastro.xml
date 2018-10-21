@@ -12,7 +12,13 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -150,7 +156,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:iconSignifier="@drawable/ic_google_maps_grey600_24dp"
+                app:iconSignifier="@drawable/baseline_book_white_24"
                 app:labelText="Descrição Veracidade"
                 app:layout_constraintEnd_toEndOf="@+id/txtbLocal_content_act_alerta_cadastro"
                 app:layout_constraintStart_toStartOf="@+id/txtbLocal_content_act_alerta_cadastro"

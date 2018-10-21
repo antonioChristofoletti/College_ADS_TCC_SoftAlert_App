@@ -83,7 +83,9 @@ public class FragActPrincipalAlertar extends Fragment implements InterfaceListen
 
     @Override
     public void retornaMensagemErro(String mensagem) {
-        Toast.makeText(this.view.getContext(), "Erro ao atualizar os alertas enviados pelo usuário. " + mensagem, Toast.LENGTH_LONG).show();
+
+        if(this.view != null)
+            Toast.makeText(this.view.getContext(), "Erro ao atualizar os alertas enviados pelo usuário. " + mensagem, Toast.LENGTH_LONG).show();
     }
 
     //endregion

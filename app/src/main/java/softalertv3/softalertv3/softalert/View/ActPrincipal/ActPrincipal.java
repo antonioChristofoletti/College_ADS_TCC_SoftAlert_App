@@ -1,16 +1,9 @@
 package softalertv3.softalertv3.softalert.View.ActPrincipal;
 
-import android.annotation.SuppressLint;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +13,6 @@ import android.view.MenuItem;
 
 import softalertv3.softalertv3.R;
 import softalertv3.softalertv3.softalert.DAOInterno.DadosOpenHelper;
-import softalertv3.softalertv3.softalert.View.ActCadastro_telefone_basico;
 import softalertv3.softalertv3.softalert.View.ActPerfilUsuario.ActPerfilUsuario;
 
 public class ActPrincipal extends AppCompatActivity {
@@ -28,9 +20,8 @@ public class ActPrincipal extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    PagerAdapter pagerAdapter;
+    ActPrincipalPagerAdapter pagerAdapter;
     TabItem tabNoticias;
-    TabItem tabDicas;
     TabItem tabPerfil;
 
     @Override
@@ -50,12 +41,11 @@ public class ActPrincipal extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayoutActPrincipal);
         tabNoticias = (TabItem) findViewById(R.id.tabLayoutActPrincipalItemNoticias);
-        tabDicas = (TabItem) findViewById(R.id.tabLayoutActPrincipalItemDicas);
         tabPerfil = (TabItem) findViewById(R.id.tabLayoutActPrincipalItemPerfil);
 
         viewPager = (ViewPager) findViewById(R.id.viewPagerActPrincipal);
 
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new ActPrincipalPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

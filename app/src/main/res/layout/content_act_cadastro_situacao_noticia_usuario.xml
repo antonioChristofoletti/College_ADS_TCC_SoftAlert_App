@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".softalert.View.ActPrincipal.FragNoticias.ActCadastroSituacaoNoticiaUsuario"
+    tools:showIn="@layout/act_cadastro_situacao_noticia_usuario">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ImageSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/baseline_face_white_24"
+                android:tint="@color/colorBackgroundIconsNaoSelecionadosMaterialDesign"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cardViewSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardViewSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario"
+
+                android:layout_width="0dp"
+                android:layout_height="62dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorBackgroundComponentsMaterialDesign"
+                app:cardBackgroundColor="@color/colorBackgroundComponentsMaterialDesign"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/ImageSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    app:ms_arrow_tint="@color/colorPrimary"
+                    app:ms_background_color="@color/colorBackgroundComponentsMaterialDesign"
+                    app:ms_hint_color="@color/colorPrimary" />
+            </android.support.v7.widget.CardView>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/txtbComentario_content_act_cadastro_situacao_noticia_usuario"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:iconSignifier="@drawable/baseline_book_white_24"
+                app:labelText="Comentário"
+                app:helperText="* Não Obrigatório"
+                app:layout_constraintEnd_toEndOf="@+id/cardViewSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewSpinnerMinhaSituacao_content_act_cadastro_situacao_noticia_usuario">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/txtComentario_content_act_cadastro_situacao_noticia_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext" />/>
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

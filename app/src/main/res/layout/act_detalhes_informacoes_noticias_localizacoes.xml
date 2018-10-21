@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".softalert.View.ActPrincipal.ActLocalizacoesUsuario.ActLocalizacoesUsuario">
+    tools:context=".softalert.View.ActPrincipal.FragNoticias.ActDetalhesInformacoesNoticiasLocalizacoes">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -56,6 +56,8 @@
 
         ></RelativeLayout>
 
-    <include layout="@layout/content_act_localizacoes_usuario" />
+    <include layout="@layout/content_act_detalhes_informacoes_noticias_localizacoes" />
+
+
 
 </android.support.design.widget.CoordinatorLayout>

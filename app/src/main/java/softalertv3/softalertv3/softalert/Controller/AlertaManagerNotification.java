@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
     public AlertaManagerNotification(Context context,InterfaceListenerAlertaManagerNotification interfaceListenerAlertaManagerNotification) {
         this.context = context;
         this.interfaceListenerAlertaManagerNotification = interfaceListenerAlertaManagerNotification;
-    }
+}
 
     public void iniciarGerenciamentoNotificacoes() {
         listaAlerta = new ArrayList<>();
@@ -64,6 +65,11 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
 
                 if(alertaNovo.getId() == alertaVelho.getId()){
                     encontrou = true;
+                    alertaNovo.setSubiuNotificacao(alertaVelho.isSubiuNotificacao());
+                    alertaNovo.setIdNotification(alertaVelho.getIdNotification());
+
+                    listaAlerta.remove(alertaVelho);
+                    listaAlerta.add(alertaNovo);
                     break;
                 }
             }
@@ -73,6 +79,15 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
         }
 
         for (Alerta alerta : listaAlerta){
+
+            if(alerta.getListaAlertaPossuiUsuarios() == null)
+                continue;
+
+            if(alerta.getListaAlertaPossuiUsuarios().get(0).getDataVisualizou() != null)
+                continue;
+
+            if(!alerta.getStatus().equals("Ativo"))
+                continue;
 
             if((alerta.getNivelAlerta().getId() == 1 || alerta.getNivelAlerta().getId() == 2) && !alerta.isSubiuNotificacao()){
                 enviarMensagem(alerta);
@@ -89,7 +104,7 @@ public class AlertaManagerNotification implements InterfaceListenerAPI{
 
     @Override
     public void retornaMensagemErro(String mensagem) {
-        Log.e("ALERT M. NOTIFICATION", mensagem);
+        Toast.makeText(context, "Erro ao atualizar os alertas enviados pelo usuário. " + mensagem, Toast.LENGTH_LONG).show();
     }
 
     //endregion

@@ -1,6 +1,8 @@
 package softalertv3.softalertv3.softalert.Model;
 
-public class LocalizacaoAlerta {
+import java.io.Serializable;
+
+public class LocalizacaoAlerta implements Serializable {
     private int id;
     private String tipo;
     private String descricao;

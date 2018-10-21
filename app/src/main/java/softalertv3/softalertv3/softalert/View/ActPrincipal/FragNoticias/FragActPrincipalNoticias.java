@@ -1,4 +1,4 @@
-package softalertv3.softalertv3.softalert.View.ActPrincipal;
+package softalertv3.softalertv3.softalert.View.ActPrincipal.FragNoticias;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +14,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import softalertv3.softalertv3.ActDetalhesInformacoesNoticias;
 import softalertv3.softalertv3.R;
 import softalertv3.softalertv3.softalert.Controller.AlertaManagerNotification;
 import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAlertaManagerNotification;
 import softalertv3.softalertv3.softalert.Model.Alerta;
+import softalertv3.softalertv3.softalert.View.ActPrincipal.ActPrincipal;
 
 public class FragActPrincipalNoticias extends Fragment implements InterfaceListenerAlertaManagerNotification{
 
@@ -47,7 +47,14 @@ public class FragActPrincipalNoticias extends Fragment implements InterfaceListe
         listViewNoticias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                FragActPrincipalNoticiasAdapter adapter = (FragActPrincipalNoticiasAdapter) listViewNoticias.getAdapter();
+
+                Alerta alerta = (Alerta) adapter.getItem(position);
+
                 Intent intent = new Intent(view.getContext(), ActDetalhesInformacoesNoticias.class);
+
+                intent.putExtra("alerta", alerta);
                 startActivity(intent);
             }
         });
@@ -66,7 +73,6 @@ public class FragActPrincipalNoticias extends Fragment implements InterfaceListe
     }
 
     //region
-
 
     @Override
     public void atualizarListagemAlerta(ArrayList<Alerta> listaAlerta) {

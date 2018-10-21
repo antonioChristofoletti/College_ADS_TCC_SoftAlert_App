@@ -1,8 +1,8 @@
 package softalertv3.softalertv3.softalert.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 
-public class NivelAlerta {
+public class NivelAlerta implements Serializable {
 
     private int id;
     private String descricao;

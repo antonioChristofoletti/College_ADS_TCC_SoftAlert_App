@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import softalertv3.softalertv3.R;
-import softalertv3.softalertv3.softalert.View.ActLocalizacoesUsuario.ActLocalizacoesUsuario;
+import softalertv3.softalertv3.softalert.View.ActPrincipal.ActLocalizacoesUsuario.ActLocalizacoesUsuario;
 
 public class ActPerfilUsuario extends AppCompatActivity {
 

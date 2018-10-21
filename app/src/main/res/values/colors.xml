@@ -8,6 +8,7 @@
     <color name="colorWhiteSemiTransparent">#80ffffff</color>
     <color name="colorBackgroundComponentsMaterialDesign">#EBEBEB</color>
     <color name="colorBackgroundIconsNaoSelecionadosMaterialDesign">#B3B3B3</color>
+    <color name="defaultColorTextView">#808080</color>
 
 
 

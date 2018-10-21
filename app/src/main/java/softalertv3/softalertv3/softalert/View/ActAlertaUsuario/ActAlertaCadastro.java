@@ -66,7 +66,6 @@ public class ActAlertaCadastro extends AppCompatActivity implements InterfaceLis
         configurarComponentes();
 
         configurarComponentesVisualizarApenas();
-
     }
 
     //region METODOS

@@ -68,21 +68,21 @@ public class FragActPrincipalAlertarAdapter extends BaseAdapter implements Inter
         String aprovado = "";
         if (!auc.getStatus().equals("Cancelado")) {
             if (auc.getVeracidade() == null || auc.getVeracidade().equals("")) {
-                aprovado = "Não Aprovado até o Momento";
+                aprovado = "NÃO APROVADO ATÉ O MOMENTO";
                 txtAprovado.setTextColor(ContextCompat.getColor(activity, R.color.eventoAguardando));
             }
             else {
                 if (auc.getVeracidade().equals("S")) {
-                    aprovado = "Evento Validado";
+                    aprovado = "EVENTO VALIDADO";
                     txtAprovado.setTextColor(ContextCompat.getColor(activity, R.color.eventoValidado));
                 }
                     else {
-                    aprovado = "Evento Reprovado";
+                    aprovado = "EVENTO REPROVADO";
                     txtAprovado.setTextColor(ContextCompat.getColor(activity, R.color.eventoCancelado_NaoAprovado));
                 }
             }
         } else {
-            aprovado = "Evento Cancelado";
+            aprovado = "EVENTO CANCELADO";
             txtAprovado.setTextColor(ContextCompat.getColor(activity, R.color.eventoCancelado_NaoAprovado));
         }
         txtAprovado.setText(aprovado);

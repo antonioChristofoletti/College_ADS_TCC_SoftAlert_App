@@ -1,4 +1,4 @@
-package softalertv3.softalertv3.softalert.View.ActLocalizacoesUsuario;
+package softalertv3.softalertv3.softalert.View.ActPrincipal.ActLocalizacoesUsuario;
 
 import android.Manifest;
 import android.app.AlertDialog;

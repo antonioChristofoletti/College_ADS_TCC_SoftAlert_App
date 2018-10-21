@@ -1,6 +1,8 @@
 package softalertv3.softalertv3.softalert.Model;
 
-public class UsuarioAdministrador extends Usuario {
+import java.io.Serializable;
+
+public class UsuarioAdministrador extends Usuario implements Serializable {
 
     private int id;
     

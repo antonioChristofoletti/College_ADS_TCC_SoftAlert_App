@@ -4,11 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+import softalertv3.softalertv3.softalert.View.ActPrincipal.FragNoticias.FragActPrincipalNoticias;
+
+public class ActPrincipalPagerAdapter extends FragmentPagerAdapter {
 
     private int numeroDeTabs;
 
-    public PagerAdapter(FragmentManager fm, int numeroDeTabs) {
+    public ActPrincipalPagerAdapter(FragmentManager fm, int numeroDeTabs) {
         super(fm);
 
         this.numeroDeTabs = numeroDeTabs;
@@ -22,9 +24,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return new FragActPrincipalNoticias();
             }
             case 1: {
-                return new FragActPrincipalDicas();
-            }
-            case 2: {
                 return new FragActPrincipalAlertar();
             }
             default: {

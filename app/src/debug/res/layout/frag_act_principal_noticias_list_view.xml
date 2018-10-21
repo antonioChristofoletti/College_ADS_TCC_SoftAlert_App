@@ -7,16 +7,13 @@
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
-        android:id="@+id/txtData_mais_Status_frag_act_principal_noticias_list_view"
-        android:layout_width="0dp"
+        android:id="@+id/txtData_frag_act_principal_noticias_list_view"
+        android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:maxLines="1"
-        android:text="Data + Status"
+        android:text="Data: 20/10/1997 19:15"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@+id/txtEvento_frag_act_principal_noticias_list_view"
-        app:layout_constraintStart_toEndOf="@+id/ImageViewAlerta_frag_act_principal_alertar_list_view"
         app:layout_constraintTop_toBottomOf="@+id/txtEvento_frag_act_principal_noticias_list_view" />
 
     <TextView
@@ -27,11 +24,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
+        android:maxLines="1"
         android:text="Evento"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:maxLines="1"
-        app:layout_constraintEnd_toStartOf="@+id/ImageViewOpcoes_frag_act_principal_alertar_list_view"
+        app:layout_constraintEnd_toStartOf="@+id/ImageViewUsuarioVisualizou_frag_act_principal_alertar_list_view"
         app:layout_constraintStart_toEndOf="@+id/ImageViewAlerta_frag_act_principal_alertar_list_view"
         app:layout_constraintTop_toTopOf="@+id/ImageViewAlerta_frag_act_principal_alertar_list_view" />
 
@@ -39,22 +36,25 @@
         android:id="@+id/txtDescricao_frag_act_principal_noticias_list_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:maxLines="1"
         android:text="Breve descrição...."
         android:textSize="12dp"
-        android:maxLines="1"
-        app:layout_constraintEnd_toEndOf="@+id/txtData_mais_Status_frag_act_principal_noticias_list_view"
-        app:layout_constraintStart_toStartOf="@+id/txtData_mais_Status_frag_act_principal_noticias_list_view"
-        app:layout_constraintTop_toBottomOf="@+id/txtData_mais_Status_frag_act_principal_noticias_list_view" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/txtData_frag_act_principal_noticias_list_view"
+        app:layout_constraintStart_toStartOf="@+id/txtStatus_frag_act_principal_noticias_list_view"
+        app:layout_constraintTop_toBottomOf="@+id/txtData_frag_act_principal_noticias_list_view" />
 
     <ImageView
-        android:id="@+id/ImageViewOpcoes_frag_act_principal_alertar_list_view"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:id="@+id/ImageViewUsuarioVisualizou_frag_act_principal_alertar_list_view"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:tint="@color/defaultColorTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ImageViewAlerta_frag_act_principal_alertar_list_view"
-        app:srcCompat="@drawable/baseline_more_vert_black_24" />
+        app:srcCompat="@drawable/baseline_visibility_off_white_24" />
 
     <ImageView
         android:id="@+id/ImageViewAlerta_frag_act_principal_alertar_list_view"
@@ -66,6 +66,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/alert_circle_red_96dp" />
+
+    <TextView
+        android:id="@+id/txtStatus_frag_act_principal_noticias_list_view"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:text="Ativo"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/txtData_frag_act_principal_noticias_list_view"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtEvento_frag_act_principal_noticias_list_view"
+        app:layout_constraintTop_toBottomOf="@+id/txtEvento_frag_act_principal_noticias_list_view" />
 
 
 </android.support.constraint.ConstraintLayout>
