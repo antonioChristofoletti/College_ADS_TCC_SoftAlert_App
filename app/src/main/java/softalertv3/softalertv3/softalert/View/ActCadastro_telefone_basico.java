@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import softalertv3.softalertv3.softalert.Controller.UsuarioClienteController;
 import softalertv3.softalertv3.softalert.DAOInterno.DAO.UsuarioClienteDAO;
 import softalertv3.softalertv3.softalert.DAOInterno.DadosOpenHelper;
 import softalertv3.softalertv3.softalert.Interface.InterfaceListenerAPI;
@@ -25,6 +26,7 @@ import softalertv3.softalertv3.softalert.Model.RequisicaoEnvioSMSTelefone;
 import softalertv3.softalertv3.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import softalertv3.softalertv3.softalert.Model.UsuarioCliente;
 import softalertv3.softalertv3.softalert.Uteis.CodigoPermissao;
@@ -70,16 +72,6 @@ public class ActCadastro_telefone_basico extends AppCompatActivity implements In
             startActivity(intent);
             finish();
         }
-
-        Button b = (Button) findViewById(R.id.button);
-
-       b.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(ActCadastro_telefone_basico.this, ActPrincipal.class);
-               startActivity(intent);
-           }
-       });
 
         configuraComponentes();
     }
@@ -168,15 +160,15 @@ public class ActCadastro_telefone_basico extends AppCompatActivity implements In
 
                 builder.setNegativeButton("Negar Permissão", new DialogInterface.OnClickListener() {
                     @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
 
-        Geral.chamarAlertDialog(builder, "", "A permissão READ_PHONE_STATE será utilizada para ler o número de telefone");
-    } else {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, CodigoPermissao.PHONE_READ_STATE);
-    }
-} else {
+                Geral.chamarAlertDialog(builder, "", "A permissão READ_PHONE_STATE será utilizada para ler o número de telefone");
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, CodigoPermissao.PHONE_READ_STATE);
+            }
+        } else {
             setaNumeroTelefone();
         }
     }
@@ -224,7 +216,7 @@ public class ActCadastro_telefone_basico extends AppCompatActivity implements In
             contaVezesSMS++;
 
             codigo = Geral.getRandomString(4);
-            txtCodigoVerificador.setText(codigo);
+            //txtCodigoVerificador.setText(codigo);
 
             RequisicaoEnvioSMS requisicaoEnvioSMS = new RequisicaoEnvioSMS();
 
@@ -240,7 +232,9 @@ public class ActCadastro_telefone_basico extends AppCompatActivity implements In
 
             requisicaoEnvioSMS.setTelefones(listaTelefones);
 
-            // UsuarioClienteController.enviarSMS(requisicaoEnvioSMS, this);
+            requisicaoEnvioSMS.setHoraRequisicao(new Date());
+
+            UsuarioClienteController.enviarSMS(requisicaoEnvioSMS, this);
 
             txtbCodigoVerificador.setEnabled(true);
             txtbCodigoVerificador.requestFocus();

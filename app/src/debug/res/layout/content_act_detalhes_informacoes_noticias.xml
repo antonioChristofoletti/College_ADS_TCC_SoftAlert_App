@@ -69,10 +69,8 @@
                     <Button
                         android:id="@+id/btnLocaisEventos_content_act_detalhes_informacoes_noticias"
                         android:layout_width="133dp"
-                        android:layout_height="36dp"
+                        android:layout_height="35dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginTop="8dp"
                         android:onClick="btnLocaisEventoOnClick"
                         android:text="LOCAIS EVENTOS"

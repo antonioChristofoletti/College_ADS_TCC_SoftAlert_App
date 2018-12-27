@@ -179,6 +179,7 @@ public class ActDetalhesInformacoesNoticiasLocalizacoes extends AppCompatActivit
         }
     }
 
+
     //endregion
 
     //region EVENTOS
