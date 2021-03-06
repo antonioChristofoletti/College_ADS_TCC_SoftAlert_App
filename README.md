@@ -1,6 +1,6 @@
 ## College ADS TCC SoftAlert App
 
-This app was developed for my final paper (Trabalho de Conclusão de Curso in portugues) on the course Technologist in Analysis and Development of Systems (Analise e Desenvolvimento de Sistemas in portuguese) – IFSP Campus Capivari.
+This app was developed for my final paper (Trabalho de Conclusão de Curso in Portugues) on the course Technologist in Analysis and Development of Systems (Analise e Desenvolvimento de Sistemas in Portuguese) – IFSP Campus Capivari.
 
 ## Purpose
 
