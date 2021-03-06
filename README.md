@@ -22,8 +22,8 @@ The amount and intensity of severe weather events have been intensifying in last
 
 - [Gradle](https://gradle.org/)
 - [Java](https://www.java.com/pt-BR/)
- - [Jersey](https://eclipse-ee4j.github.io/jersey/)
-  - [Twilio](https://www.twilio.com/)
+  - [Jersey](https://eclipse-ee4j.github.io/jersey/)
+    - [Twilio](https://www.twilio.com/)
 
 ## Status
 
